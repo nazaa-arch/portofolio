@@ -8,7 +8,7 @@
 
 ---
 
-## 🚀 Proyek Unggulan (Flagship Systems)
+## 🚀 Proyek Unggulan & Ekosistem SteamCraft
 
 ### 1. [STEAM-Craft Online](https://steamcraft.online)
 **Platform Kolaborasi & Edukasi Sains Multidisiplin Berbasis AI**
@@ -23,9 +23,26 @@
 **Verification & Laboratory Data Integrity Engine (v1.0.0 MAX)**
 - 🔬 **Live Web Platform**: [`verilab.steamcraft.online`](https://verilab.steamcraft.online)
 - ⚡ **Interactive Swagger API**: [`verilab-api.onrender.com/docs`](https://verilab-api.onrender.com/docs)
+- 💻 **Source Code**: [`github.com/nazaa-arch/VerilabAI`](https://github.com/nazaa-arch/VerilabAI)
 - **Peran**: *Creator & Lead AI Engineer*
 - **Teknologi**: Python 3.12, FastAPI, Pydantic v2, Docker, Gaussian Process Regression (GPR), Monte Carlo Sobol Sensitivity, SQLite WAL, FPDF2.
 - **Ikhtisar**: Microservice full-stack cerdas untuk verifikasi integritas data eksperimen, kalibrasi metrologi sensor dengan pita kepercayaan Bayes 95%, deteksi anomali/sintetis, dan penerbitan sertifikat kepatuhan riset ber-sidik-jari SHA-256.
+
+### 3. [PaperCraft AI](https://scholar.steamcraft.online)
+**Scientific Manuscript & IMRaD Structural Integrity Auditor**
+- 📝 **Live Platform**: [`scholar.steamcraft.online`](https://scholar.steamcraft.online)
+- 💻 **Source Code**: [`github.com/nazaa-arch/papercraft-ai`](https://github.com/nazaa-arch/papercraft-ai)
+- **Peran**: *Lead Developer & AI Architect*
+- **Teknologi**: React 19, TypeScript, Tailwind CSS, Vite, NLP Pattern Matcher, VeriLab AI Engine Bridge.
+- **Ikhtisar**: Platform audit naskah publikasi ilmiah cerdas mencakup 7 pilar IMRaD, ekstraksi klaim signifikansi statistik, pencocokan silang sitasi in-text vs daftar pustaka, dan rubrik pre-flight SINTA 1 & Scopus Q1/Q2.
+
+### 4. [SteamSim Lab](https://sim.steamcraft.online)
+**Interactive In-Browser Virtual Science & Applied Mathematics Laboratory Studio**
+- 🌌 **Live Platform**: [`sim.steamcraft.online`](https://sim.steamcraft.online)
+- 💻 **Source Code**: [`github.com/nazaa-arch/steamsim-lab`](https://github.com/nazaa-arch/steamsim-lab)
+- **Peran**: *Lead Developer & Simulation Engineer*
+- **Teknologi**: React 19, TypeScript, HTML5 High-Performance Canvas (60 FPS), Runge-Kutta Numerical Integrator.
+- **Ikhtisar**: Studio simulasi sains interaktif tanpa instalasi untuk eksplorasi Gerak Proyektil dengan Drag Kuadratik, Osilator Harmonik Teredam & Resonansi, Titrasi Kimia pH Buffer, Teori Chaos Bandul Ganda, dan ekspor telemetri sensor CSV.
 
 ---
 
