@@ -182,13 +182,40 @@
             box-shadow: 0 16px 40px -8px rgba(16, 102, 255, 0.32);
         }
 
-        /* Ariq Arvy Curved Arc Carousel */
+        /* Ariq Arvy Curved Arc Carousel - Properly Centered 3D Ribbon */
+        .arc-viewport {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            user-select: none;
+        }
+        .arc-track {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
         .arc-card {
+            position: absolute !important;
+            top: 30px !important;
+            left: 0 !important;
+            width: 280px !important;
+            height: 190px !important;
+            border-radius: 20px !important;
+            background: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            box-shadow: 0 12px 30px -8px rgba(16, 102, 255, 0.16), 0 2px 6px rgba(15, 23, 42, 0.04) !important;
             will-change: transform;
-            transition: box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
         }
         .arc-card:hover {
-            box-shadow: 0 20px 40px -10px rgba(16, 102, 255, 0.28);
+            border-color: #1066FF !important;
+            box-shadow: 0 20px 44px -8px rgba(16, 102, 255, 0.28) !important;
         }
 
         /* Custom Scrollbar */
@@ -880,79 +907,79 @@
         </div>
 
         <!-- Arc Viewport -->
-        <div id="arcView" class="relative w-full h-72 overflow-hidden cursor-grab active:cursor-grabbing">
-            <div id="arcTrack" class="absolute left-0 top-1/2 -translate-y-1/2 flex items-center will-change-transform">
+        <div id="arcView" class="arc-viewport cursor-grab active:cursor-grabbing">
+            <div id="arcTrack" class="arc-track">
                 <!-- Arc Card 1 -->
-                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                <div class="arc-card">
                     <div class="flex items-center justify-between">
                         <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Mobile UI</span>
-                        <i class="fa-solid fa-mobile text-[#1066FF]"></i>
+                        <i class="fa-solid fa-mobile text-[#1066FF] text-base"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-[#0F172A] text-sm">BISINDO Gesture Camera</h4>
-                        <p class="text-[11px] text-[#475569] mt-1">High-contrast accessibility screen for deaf learners.</p>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">High-contrast accessibility screen for deaf learners.</p>
                     </div>
-                    <div class="text-[10px] font-mono text-[#1066FF] font-bold">SUS Score: 82.3</div>
+                    <div class="text-xs font-mono text-[#1066FF] font-bold">SUS Score: 82.3</div>
                 </div>
                 <!-- Arc Card 2 -->
-                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                <div class="arc-card">
                     <div class="flex items-center justify-between">
                         <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Design Tokens</span>
-                        <i class="fa-solid fa-palette text-[#1066FF]"></i>
+                        <i class="fa-solid fa-palette text-[#1066FF] text-base"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-[#0F172A] text-sm">STEAM-Craft Style Guide</h4>
-                        <p class="text-[11px] text-[#475569] mt-1">Color, typography, and atomic elevation tokens.</p>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">Color, typography, and atomic elevation tokens.</p>
                     </div>
-                    <div class="text-[10px] font-mono text-[#1066FF] font-bold">Juara 2 DIMAS TI</div>
+                    <div class="text-xs font-mono text-[#1066FF] font-bold">Juara 2 DIMAS TI</div>
                 </div>
                 <!-- Arc Card 3 -->
-                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                <div class="arc-card">
                     <div class="flex items-center justify-between">
                         <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">C4ISR Radar</span>
-                        <i class="fa-solid fa-crosshairs text-amber-500"></i>
+                        <i class="fa-solid fa-crosshairs text-amber-500 text-base"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-[#0F172A] text-sm">WAYANG Tactical Map</h4>
-                        <p class="text-[11px] text-[#475569] mt-1">Real-time OT/IT decoy threat grid visualizer.</p>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">Real-time OT/IT decoy threat grid visualizer.</p>
                     </div>
-                    <div class="text-[10px] font-mono text-amber-600 font-bold">Kartika Cyber 2026</div>
+                    <div class="text-xs font-mono text-amber-600 font-bold">Kartika Cyber 2026</div>
                 </div>
                 <!-- Arc Card 4 -->
-                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                <div class="arc-card">
                     <div class="flex items-center justify-between">
                         <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Metrology UI</span>
-                        <i class="fa-solid fa-chart-area text-purple-600"></i>
+                        <i class="fa-solid fa-chart-area text-purple-600 text-base"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-[#0F172A] text-sm">VeriLab Bayesian Plots</h4>
-                        <p class="text-[11px] text-[#475569] mt-1">Interactive Gaussian Process 95% confidence bands.</p>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">Interactive Gaussian Process 95% confidence bands.</p>
                     </div>
-                    <div class="text-[10px] font-mono text-purple-600 font-bold">SHA-256 Audit</div>
+                    <div class="text-xs font-mono text-purple-600 font-bold">SHA-256 Audit</div>
                 </div>
                 <!-- Arc Card 5 -->
-                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                <div class="arc-card">
                     <div class="flex items-center justify-between">
                         <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">3D Viewport</span>
-                        <i class="fa-solid fa-cube text-emerald-600"></i>
+                        <i class="fa-solid fa-cube text-emerald-600 text-base"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-[#0F172A] text-sm">MakerCraft WebGL Controls</h4>
-                        <p class="text-[11px] text-[#475569] mt-1">Parametric 3D CAD modeling studio controls.</p>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">Parametric 3D CAD modeling studio controls.</p>
                     </div>
-                    <div class="text-[10px] font-mono text-emerald-600 font-bold">Three.js Engine</div>
+                    <div class="text-xs font-mono text-emerald-600 font-bold">Three.js Engine</div>
                 </div>
                 <!-- Arc Card 6 -->
-                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                <div class="arc-card">
                     <div class="flex items-center justify-between">
                         <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Sim Studio</span>
-                        <i class="fa-solid fa-atom text-[#1066FF]"></i>
+                        <i class="fa-solid fa-atom text-[#1066FF] text-base"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-[#0F172A] text-sm">SteamSim Physics Sliders</h4>
-                        <p class="text-[11px] text-[#475569] mt-1">Runge-Kutta numerical integrator telemetry.</p>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">Runge-Kutta numerical integrator telemetry.</p>
                     </div>
-                    <div class="text-[10px] font-mono text-[#1066FF] font-bold">60 FPS Canvas</div>
+                    <div class="text-xs font-mono text-[#1066FF] font-bold">60 FPS Canvas</div>
                 </div>
             </div>
         </div>
@@ -4020,43 +4047,47 @@
         const arcTrack = document.getElementById('arcTrack');
         if (!arcView || !arcTrack) return;
 
-        let arcCards = Array.from(arcTrack.children);
-        let arcStep = 0, arcTotal = 0, arcW = 0, arcCurve = 0, arcOffset = 0;
-        let arcBoost = 0, arcLastY = window.scrollY, arcLast = 0, arcOn = true;
-        const ARC_SPEED = 38;
+        // Clean any pre-existing clones
+        arcTrack.querySelectorAll('.arc-clone').forEach(c => c.remove());
 
-        function arcSetup() {
-            const card = arcTrack.querySelector('.arc-card');
-            if (!card) return;
-            const style = window.getComputedStyle(card);
-            const mr = parseFloat(style.marginRight) || 16;
-            arcW = card.offsetWidth;
-            arcStep = arcW + mr;
-            
-            // Clone cards to ensure infinite track loop
-            const needed = Math.ceil((window.innerWidth * 2) / (arcCards.length * arcStep));
-            if (arcTrack.querySelectorAll('.arc-clone').length === 0) {
-                const originals = [...arcCards];
-                for (let k = 0; k < needed; k++) {
-                    originals.forEach(c => {
-                        const clone = c.cloneNode(true);
-                        clone.classList.add('arc-clone');
-                        arcTrack.appendChild(clone);
-                    });
-                }
-            }
-            arcCards = Array.from(arcTrack.children);
-            arcTotal = arcCards.length * arcStep;
-            arcCurve = arcW * 0.38;
+        const originals = Array.from(arcTrack.children);
+        if (originals.length === 0) return;
+
+        const ARC_GAP = 28;
+        const ARC_SPEED = 34;
+        let arcW = 280;
+        let arcStep = arcW + ARC_GAP;
+        let arcCurve = 36; // Gentle curve so cards never clip or tilt severely
+        let arcOffset = 0;
+        let arcBoost = 0;
+        let arcLastY = window.scrollY;
+        let arcLast = 0;
+        let arcOn = true;
+
+        // Multiply cards to comfortably fill the screen across all viewports
+        const minWidth = (window.innerWidth || 1200) + (arcStep * 4);
+        let totalWidth = originals.length * arcStep;
+        while (totalWidth < minWidth * 2) {
+            originals.forEach(c => {
+                const clone = c.cloneNode(true);
+                clone.classList.add('arc-clone');
+                arcTrack.appendChild(clone);
+            });
+            totalWidth += originals.length * arcStep;
         }
+
+        let arcCards = Array.from(arcTrack.children);
+        let arcTotal = arcCards.length * arcStep;
 
         function arcRender() {
             const half = arcView.clientWidth / 2;
-            const radius = Math.max(half, arcW * 1.8);
+            const radius = Math.max(half, arcW * 2.2);
             for (let i = 0; i < arcCards.length; i++) {
                 const x = ((i * arcStep + arcOffset) % arcTotal + arcTotal) % arcTotal - arcStep;
                 const u = (x + arcW / 2 - half) / radius;
-                arcCards[i].style.transform = `translate3d(${x.toFixed(1)}px, ${(arcCurve * u * u).toFixed(1)}px, 0) rotate(${(u * 9).toFixed(2)}deg)`;
+                const y = arcCurve * (u * u);
+                const rot = u * 5.5; // Gentle rotation max ~5 degrees
+                arcCards[i].style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg)`;
             }
         }
 
@@ -4070,20 +4101,25 @@
             requestAnimationFrame(arcTick);
         }
 
-        arcSetup();
-        arcRender();
-        window.addEventListener('resize', () => { arcSetup(); arcRender(); });
+        function setup() {
+            arcW = originals[0].offsetWidth || 280;
+            arcStep = arcW + ARC_GAP;
+            arcCards = Array.from(arcTrack.children);
+            arcTotal = arcCards.length * arcStep;
+            arcRender();
+        }
 
+        window.addEventListener('resize', setup);
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
-            arcBoost = Math.min(450, arcBoost + Math.abs(y - arcLastY) * 2.8);
+            arcBoost = Math.min(260, arcBoost + Math.abs(y - arcLastY) * 1.8);
             arcLastY = y;
         }, { passive: true });
 
+        setup();
         requestAnimationFrame(arcTick);
     }
 
-    // 4. Shrinking Pill Navbar on Scroll
     function initPillNav() {
         const nav = document.getElementById('main-navbar');
         if (!nav) return;
