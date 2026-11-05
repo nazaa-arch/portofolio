@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Naza Firmansyah | Data Science & UI/UX Portfolio</title>
+    <title>Muhammad Naza Firmansyah — Data Science & UI/UX Product Design Portfolio</title>
     <meta name="description" content="Portofolio resmi Muhammad Naza Firmansyah - Mahasiswa Sains Data UNESA (IPK 3.80), Juara 2 UI/UX DIMAS TI Nasional, berpengalaman di BPS & Kewirausahaan.">
     
     <!-- Google Fonts -->
@@ -168,6 +168,156 @@
             box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
         }
     </style>
+
+    <!-- Ariq Arvy Design System & Theme Styles -->
+    <style>
+        :root {
+            --primary: #1066FF;
+            --primary-hover: #0A5AF0;
+            --primary-pressed: #0753E2;
+            --on-primary: #FFFFFF;
+            --primary-container: #DBE8FC;
+            --secondary: #1E3A8A;
+            --accent: #93C5FD;
+            --success: #10B981;
+            --ink: #0F172A;
+            --neutral-700: #334155;
+            --neutral-500: #64748B;
+            --neutral-300: #CBD5E1;
+            --neutral-200: #E2E8F0;
+            --neutral-100: #F1F5F9;
+            --surface: #FFFFFF;
+            --background: #F5F8FE;
+            --sky-wash: #E0EEFE;
+            --sky-glow: #BADDFC;
+            --silk-blue: #4F96F9;
+            --studio: #F0F2F8;
+
+            --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(15,23,42,.04), 0 2px 8px rgba(15,23,42,.04);
+            --shadow-md: 0 8px 24px -8px rgba(16,102,255,.18);
+            --shadow-lg: 0 16px 48px -12px rgba(16,102,255,.14);
+        }
+
+        /* Default Light / Ariq Arvy Sky Studio Theme */
+        body {
+            background-color: var(--background);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Hero lines from ariqarvy.com */
+        .hero-lines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .hero-lines i {
+            position: absolute;
+            top: -20%;
+            bottom: -20%;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(16,102,255,.18) 35%, rgba(79,150,249,.25) 60%, transparent);
+        }
+        .hero-lines i:nth-child(1) { left: 18%; transform: rotate(-8deg); }
+        .hero-lines i:nth-child(2) { left: 50%; transform: rotate(4deg); }
+        .hero-lines i:nth-child(3) { right: 18%; transform: rotate(-5deg); }
+
+        /* Floating Hero Tiles for Card-Dealing Intro */
+        .hero-tile {
+            position: absolute;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(16, 102, 255, 0.15);
+            box-shadow: 0 12px 32px -8px rgba(16, 102, 255, 0.22);
+            backdrop-filter: blur(12px);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 20;
+            transform-origin: center center;
+            pointer-events: auto;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .hero-tile:hover {
+            border-color: var(--primary);
+            box-shadow: 0 16px 40px -8px rgba(16, 102, 255, 0.32);
+        }
+
+        /* Shrinking Pill Nav on Scroll */
+        #main-navbar {
+            transition: all 0.45s cubic-bezier(.2,.7,.2,1);
+        }
+        #main-navbar.scrolled {
+            top: 14px;
+            max-width: 1100px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: var(--r-full);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(16, 102, 255, 0.14);
+            box-shadow: 0 12px 36px -10px rgba(16, 102, 255, 0.2);
+            height: 60px;
+        }
+
+        /* Ariq Arvy Curved Arc Carousel */
+        .arc-card {
+            will-change: transform;
+            transition: box-shadow 0.3s ease;
+        }
+        .arc-card:hover {
+            box-shadow: 0 20px 40px -10px rgba(16, 102, 255, 0.28);
+        }
+
+        /* Dark Mode overrides when .dark is toggled */
+        html.dark {
+            --background: #08090d;
+            --surface: #111420;
+            --ink: #F1F5F9;
+            --neutral-700: #CBD5E1;
+            --neutral-500: #94A3B8;
+            --neutral-200: rgba(255,255,255,0.08);
+            --sky-wash: rgba(16, 102, 255, 0.18);
+            --sky-glow: rgba(79, 150, 249, 0.25);
+        }
+        html.dark body {
+            background-color: #08090d;
+            color: #F1F5F9;
+        }
+        html.dark #main-navbar.scrolled {
+            background: rgba(17, 20, 32, 0.88);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        html.dark .hero-tile {
+            background: rgba(19, 23, 34, 0.9);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+        }
+        html.dark .glass-card, html.dark .bg-white {
+            background-color: #121624 !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            color: #F1F5F9 !important;
+        }
+        html.dark .text-[#0F172A] {
+            color: #F8FAFC !important;
+        }
+        html.dark .text-[#334155], html.dark .text-[#475569] {
+            color: #94A3B8 !important;
+        }
+        html.dark .bg-[#F5F8FE] {
+            background-color: #0c0f1a !important;
+        }
+        html.dark .border-[#CBD5E1], html.dark .border-[#E2E8F0] {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+    </style>
+
 </head>
 <body class="selection:bg-accentIndigo selection:text-white relative bg-grid-pattern">
 
@@ -203,23 +353,28 @@
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-1 bg-white/[0.03] p-1.5 rounded-full border border-white/[0.06] text-sm font-medium text-gray-300">
                     <a href="#home" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Beranda</a>
-                    <a href="#about" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Tentang</a>
-                    <a href="#experience" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Pengalaman</a>
-                    <a href="#tech-stack" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Tech Stack</a>
-                    <a href="#projects" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Proyek</a>
-                    <a href="#skills" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Keahlian</a>
-                    <a href="#education" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Pendidikan & Prestasi</a>
-                    <a href="#ai-consultant" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 text-accentCyan">
+                    <a href="#ui-ux" class="px-3.5 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE]/60 font-semibold transition-all flex items-center gap-1.5 text-[#1066FF]">
+                        <i class="fa-solid fa-pen-ruler text-xs"></i> UI/UX
+                    </a>
+                    <a href="#tech-stack" class="px-3.5 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE]/60 transition-all">Tech Stack</a>
+                    <a href="#projects" class="px-3.5 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE]/60 transition-all">Proyek</a>
+                    <a href="#about" class="px-3.5 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE]/60 transition-all">Tentang</a>
+                    <a href="#experience" class="px-3.5 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE]/60 transition-all">Pengalaman</a>
+                    <a href="#education" class="px-3.5 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE]/60 transition-all">Pendidikan</a>
+                    <a href="#ai-consultant" class="px-3.5 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE]/60 transition-all flex items-center gap-1.5 text-[#1066FF]">
                         <i class="fa-solid fa-sparkles text-xs"></i> AI Lab
                     </a>
                 </div>
 
-                <!-- Action CTA -->
+                <!-- Action CTA & Theme Toggle -->
                 <div class="hidden sm:flex items-center gap-3">
-                    <a href="CV_Muhammad_Naza_Firmansyah.pdf" download="CV_Muhammad_Naza_Firmansyah.pdf" class="px-4 py-2.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 hover:bg-white/10 text-gray-200 transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-download text-accentBlue"></i> Unduh CV
+                    <button id="themeToggleBtn" onclick="toggleTheme()" class="w-9 h-9 rounded-full bg-[#E0EEFE] hover:bg-[#DBE8FC] text-[#1066FF] border border-[#CBD5E1] flex items-center justify-center transition-all shadow-sm" title="Ganti Tema (Light/Dark)">
+                        <i class="fa-solid fa-moon text-sm" id="themeIcon"></i>
+                    </button>
+                    <a href="CV_Muhammad_Naza_Firmansyah.pdf" download="CV_Muhammad_Naza_Firmansyah.pdf" class="px-4 py-2.5 rounded-full text-xs font-bold bg-[#E0EEFE] hover:bg-[#DBE8FC] text-[#1066FF] border border-[#CBD5E1] transition-all flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-download"></i> Unduh CV
                     </a>
-                    <a href="#contact" class="px-5 py-2.5 rounded-full text-xs font-bold bg-gradient-to-r from-accentBlue to-accentPurple text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all">
+                    <a href="#contact" class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#1066FF] hover:bg-[#0A5AF0] text-white transition-all shadow-md hover:shadow-lg">
                         Hubungi Saya
                     </a>
                 </div>
@@ -256,7 +411,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen pt-32 pb-20 relative flex items-center z-10">
+    <section id="home" class="min-h-screen pt-32 pb-20 relative flex items-center z-10 overflow-hidden bg-gradient-to-b from-[#F5F8FE] via-white to-[#F5F8FE]">
+        <!-- Ariq Arvy Signature Hero Lines -->
+        <div class="hero-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+        
+        <!-- Ambient Sky Glow Blobs -->
+        <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#DBE8FC]/60 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-32 w-96 h-96 rounded-full bg-[#E0EEFE]/60 blur-3xl pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-5 sm:px-8 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
@@ -392,6 +553,481 @@
             </div>
         </div>
     </section>
+
+
+    <!-- ==================== UI/UX & PRODUCT DESIGN SHOWCASE ==================== -->
+    <section id="ui-ux" class="py-24 relative z-10 border-t border-[#E2E8F0] bg-white">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-widest bg-[#DBE8FC] text-[#1066FF] border border-[#93C5FD] uppercase mb-3">
+                        <i class="fa-solid fa-pen-ruler"></i> UI/UX & Product Design
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
+                        Human-Centered Experiences &amp; <br class="hidden sm:inline">
+                        <span class="text-[#1066FF]">Usability Engineering.</span>
+                    </h2>
+                    <p class="text-[#475569] text-base max-w-2xl mt-4 leading-relaxed">
+                        Menggabungkan riset empati, arsitektur informasi terstruktur, psikometrik usability teruji (SUS 82.3), serta prototipe interaktif berstandar industri dan pemenang kompetisi nasional.
+                    </p>
+                </div>
+
+                <!-- Credential Badges -->
+                <div class="flex flex-wrap gap-2.5 max-w-md self-start md:self-auto">
+                    <div class="px-3.5 py-2 rounded-xl bg-[#F5F8FE] border border-[#CBD5E1] flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-medal text-amber-500 text-sm"></i>
+                        <span class="text-xs font-bold text-[#0F172A]">Juara 2 DIMAS TI</span>
+                    </div>
+                    <div class="px-3.5 py-2 rounded-xl bg-[#F5F8FE] border border-[#CBD5E1] flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-trophy text-[#1066FF] text-sm"></i>
+                        <span class="text-xs font-bold text-[#0F172A]">Finalis GEMASTIK XVIII</span>
+                    </div>
+                    <div class="px-3.5 py-2 rounded-xl bg-[#F5F8FE] border border-[#CBD5E1] flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-chart-simple text-emerald-600 text-sm"></i>
+                        <span class="text-xs font-bold text-[#0F172A]">SUS 82.3 (Grade A)</span>
+                    </div>
+                    <div class="px-3.5 py-2 rounded-xl bg-[#F5F8FE] border border-[#CBD5E1] flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-universal-access text-purple-600 text-sm"></i>
+                        <span class="text-xs font-bold text-[#0F172A]">WCAG 2.1 AAA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UI/UX Case Studies Grid (4 Cards) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                
+                <!-- Card 1: This Me (GEMASTIK & DIMAS TI) -->
+                <div class="glass-card overflow-hidden rounded-3xl border border-[#CBD5E1] bg-white hover:border-[#1066FF] transition-all duration-500 shadow-lg hover:shadow-xl group flex flex-col justify-between">
+                    <div>
+                        <!-- Header banner graphic -->
+                        <div class="h-64 relative bg-gradient-to-br from-[#1066FF] to-[#1E3A8A] overflow-hidden p-6 flex flex-col justify-between text-white">
+                            <div class="flex items-center justify-between z-10">
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white/20 backdrop-blur-md border border-white/30 text-white">
+                                    Accessibility &amp; Mobile App
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-400 text-amber-950 flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-award"></i> Juara 2 &amp; Finalis GEMASTIK
+                                </span>
+                            </div>
+
+                            <div class="z-10 mt-auto flex items-end justify-between">
+                                <div>
+                                    <h3 class="text-2xl font-black tracking-tight text-white mb-1">"This Me" — BISINDO Learning</h3>
+                                    <p class="text-sky-100 text-xs font-medium max-w-sm">Aplikasi mobile pembelajaran bahasa isyarat BISINDO berbasis Computer Vision &amp; Gamifikasi Mikro.</p>
+                                </div>
+                                <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-hands-asl-interpreting"></i>
+                                </div>
+                            </div>
+
+                            <div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-7">
+                            <div class="grid grid-cols-3 gap-3 mb-6 p-3.5 rounded-2xl bg-[#F5F8FE] border border-[#E2E8F0] text-center">
+                                <div>
+                                    <div class="text-lg font-black text-[#1066FF] font-mono">82.3</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">SUS Score</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-emerald-600 font-mono">AAA</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">WCAG Contrast</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-[#0F172A] font-mono">40+</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Hi-Fi Screens</div>
+                                </div>
+                            </div>
+
+                            <p class="text-[#334155] text-sm leading-relaxed mb-6">
+                                Dirancang melalui pendekatan <strong>Design Thinking 5 Tahap</strong> dengan melibatkan langsung responden Teman Tuli. Fitur utama mencakup pemindai gestur tangan real-time, modul belajar terpersonalisasi, kuis interaktif, serta panduan ergonomi visual yang meminimalkan kelelahan mata.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Figma Components</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Usability Testing</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">User Journey</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Interactive Prototype</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="px-7 pb-7 pt-0 flex items-center justify-between gap-3 border-t border-[#E2E8F0] mt-auto">
+                        <button onclick="openUiModal('thisme')" class="py-2.5 px-4 rounded-xl bg-[#1066FF] hover:bg-[#0A5AF0] text-white text-xs font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                            <span>Buka Studi Kasus UI/UX</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                        <a href="https://youtu.be/ajHN5r6y010" target="_blank" class="py-2.5 px-4 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] text-[#1066FF] border border-[#CBD5E1] text-xs font-bold transition-all flex items-center gap-2">
+                            <i class="fa-brands fa-youtube text-red-500"></i>
+                            <span>Video Demo</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: STEAM-Craft Design System & Web App -->
+                <div class="glass-card overflow-hidden rounded-3xl border border-[#CBD5E1] bg-white hover:border-[#1066FF] transition-all duration-500 shadow-lg hover:shadow-xl group flex flex-col justify-between">
+                    <div>
+                        <!-- Header banner graphic -->
+                        <div class="h-64 relative bg-gradient-to-br from-[#0284C7] to-[#0369A1] overflow-hidden p-6 flex flex-col justify-between text-white">
+                            <div class="flex items-center justify-between z-10">
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white/20 backdrop-blur-md border border-white/30 text-white">
+                                    Design System &amp; Web App
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-400 text-amber-950 flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-award"></i> Juara 2 DIMAS TI 2026
+                                </span>
+                            </div>
+
+                            <div class="z-10 mt-auto flex items-end justify-between">
+                                <div>
+                                    <h3 class="text-2xl font-black tracking-tight text-white mb-1">STEAM-Craft Design System</h3>
+                                    <p class="text-sky-100 text-xs font-medium max-w-sm">Arsitektur desain antarmuka terpadu untuk platform inkubasi riset STEAM multi-modul.</p>
+                                </div>
+                                <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-cubes"></i>
+                                </div>
+                            </div>
+
+                            <div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-7">
+                            <div class="grid grid-cols-3 gap-3 mb-6 p-3.5 rounded-2xl bg-[#F5F8FE] border border-[#E2E8F0] text-center">
+                                <div>
+                                    <div class="text-lg font-black text-[#1066FF] font-mono">13</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Riset Terintegrasi</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-emerald-600 font-mono">4-Pilar</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Rubrik AI</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-[#0F172A] font-mono">100%</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Responsive</div>
+                                </div>
+                            </div>
+
+                            <p class="text-[#334155] text-sm leading-relaxed mb-6">
+                                Membangun <strong>scalable design system</strong> lengkap di Figma mencakup token warna, tipografi ritmis, kartu bento adaptif, formulir penyerahan naskah, serta dashboard visualisasi analitik skor AI 4 pilar.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Design Tokens</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Bento Grid UI</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Adaptive Theme</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">React Components</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="px-7 pb-7 pt-0 flex items-center justify-between gap-3 border-t border-[#E2E8F0] mt-auto">
+                        <button onclick="openUiModal('steamcraft')" class="py-2.5 px-4 rounded-xl bg-[#1066FF] hover:bg-[#0A5AF0] text-white text-xs font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                            <span>Buka Studi Kasus UI/UX</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                        <a href="https://app.steamcraft.online" target="_blank" class="py-2.5 px-4 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] text-[#1066FF] border border-[#CBD5E1] text-xs font-bold transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>Live App</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: WAYANG C4ISR Tactical Interface -->
+                <div class="glass-card overflow-hidden rounded-3xl border border-[#CBD5E1] bg-white hover:border-[#1066FF] transition-all duration-500 shadow-lg hover:shadow-xl group flex flex-col justify-between">
+                    <div>
+                        <!-- Header banner graphic -->
+                        <div class="h-64 relative bg-gradient-to-br from-[#1E293B] to-[#0F172A] overflow-hidden p-6 flex flex-col justify-between text-white">
+                            <div class="flex items-center justify-between z-10">
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white/20 backdrop-blur-md border border-white/30 text-white">
+                                    Tactical Command &amp; Ergonomics
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500 text-black flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-shield"></i> Kartika Cyber 2026
+                                </span>
+                            </div>
+
+                            <div class="z-10 mt-auto flex items-end justify-between">
+                                <div>
+                                    <h3 class="text-2xl font-black tracking-tight text-white mb-1">WAYANG C4ISR Interface</h3>
+                                    <p class="text-slate-300 text-xs font-medium max-w-sm">Dashboard pertahanan siber taktis berdensitas data tinggi untuk pengawasan infrastruktur IT/OT.</p>
+                                </div>
+                                <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-amber-400 text-2xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-crosshairs"></i>
+                                </div>
+                            </div>
+
+                            <div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-amber-500/10 blur-xl pointer-events-none"></div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-7">
+                            <div class="grid grid-cols-3 gap-3 mb-6 p-3.5 rounded-2xl bg-[#F5F8FE] border border-[#E2E8F0] text-center">
+                                <div>
+                                    <div class="text-lg font-black text-[#1066FF] font-mono">&lt;50ms</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Update Latency</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-amber-600 font-mono">Zero</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Cognitive Overload</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-emerald-600 font-mono">RFC 6962</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Merkle Proof UI</div>
+                                </div>
+                            </div>
+
+                            <p class="text-[#334155] text-sm leading-relaxed mb-6">
+                                Mengutamakan prinsip <strong>human factors in high-stress decision making</strong>. Memvisualisasikan topologi serangan honeypot IT/OT, log audit forensik anti-rusak, serta tombol aksi cepat triase pertahanan siber dengan hierarki visual yang ketat.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">High-Density UI</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Dark Ergonomics</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Threat Mapping</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Incident Triage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="px-7 pb-7 pt-0 flex items-center justify-between gap-3 border-t border-[#E2E8F0] mt-auto">
+                        <button onclick="openUiModal('wayang')" class="py-2.5 px-4 rounded-xl bg-[#1066FF] hover:bg-[#0A5AF0] text-white text-xs font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                            <span>Buka Studi Kasus UI/UX</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                        <a href="https://cyber.steamcraft.online" target="_blank" class="py-2.5 px-4 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] text-[#1066FF] border border-[#CBD5E1] text-xs font-bold transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>Live Dashboard</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4: VeriLab AI Metrology & Scientific Audit UI -->
+                <div class="glass-card overflow-hidden rounded-3xl border border-[#CBD5E1] bg-white hover:border-[#1066FF] transition-all duration-500 shadow-lg hover:shadow-xl group flex flex-col justify-between">
+                    <div>
+                        <!-- Header banner graphic -->
+                        <div class="h-64 relative bg-gradient-to-br from-[#4F46E5] to-[#312E81] overflow-hidden p-6 flex flex-col justify-between text-white">
+                            <div class="flex items-center justify-between z-10">
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white/20 backdrop-blur-md border border-white/30 text-white">
+                                    Scientific Data Visualization
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-200 text-indigo-950 flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-flask"></i> Laboratory Engine
+                                </span>
+                            </div>
+
+                            <div class="z-10 mt-auto flex items-end justify-between">
+                                <div>
+                                    <h3 class="text-2xl font-black tracking-tight text-white mb-1">VeriLab AI Studio</h3>
+                                    <p class="text-indigo-100 text-xs font-medium max-w-sm">Interface verifikasi integritas data laboratorium &amp; plotting pita kepercayaan Bayes 95%.</p>
+                                </div>
+                                <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                            </div>
+
+                            <div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-7">
+                            <div class="grid grid-cols-3 gap-3 mb-6 p-3.5 rounded-2xl bg-[#F5F8FE] border border-[#E2E8F0] text-center">
+                                <div>
+                                    <div class="text-lg font-black text-[#1066FF] font-mono">95%</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Bayes Interval</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-purple-600 font-mono">Drag&amp;Drop</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">CSV Validator</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-black text-[#0F172A] font-mono">PDF</div>
+                                    <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">Cert Report</div>
+                                </div>
+                            </div>
+
+                            <p class="text-[#334155] text-sm leading-relaxed mb-6">
+                                Memfasilitasi peneliti dalam memvalidasi kepatuhan data eksperimen melalui drag-and-drop CSV, visualisasi dinamis regresi Gaussian Process, dan ekspor instan sertifikat ber-sidik jari kriptografis SHA-256.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Data Visualization</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Interactive Sliders</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">PDF Certificate</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#E0EEFE] text-[#1066FF]">Swagger Docs UI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="px-7 pb-7 pt-0 flex items-center justify-between gap-3 border-t border-[#E2E8F0] mt-auto">
+                        <button onclick="openUiModal('verilab')" class="py-2.5 px-4 rounded-xl bg-[#1066FF] hover:bg-[#0A5AF0] text-white text-xs font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                            <span>Buka Studi Kasus UI/UX</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                        <a href="https://verilab.steamcraft.online" target="_blank" class="py-2.5 px-4 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] text-[#1066FF] border border-[#CBD5E1] text-xs font-bold transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>Live Platform</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Design Thinking Process Stepper (5 Steps) -->
+            <div class="p-8 sm:p-10 rounded-3xl bg-[#F5F8FE] border border-[#CBD5E1] shadow-sm">
+                <div class="max-w-2xl mb-8">
+                    <span class="text-xs font-bold tracking-widest text-[#1066FF] uppercase font-mono">METHODOLOGY</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mt-1">
+                        Siklus Desain Produk: Riset hingga Evaluasi
+                    </h3>
+                    <p class="text-[#475569] text-sm mt-2 leading-relaxed">
+                        Metodologi terstruktur yang menjamin setiap elemen desain memiliki landasan data empiris dan menyelesaikan masalah riil pengguna.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <!-- Step 1 -->
+                    <div class="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold font-mono text-[#1066FF] bg-[#E0EEFE] px-2 py-0.5 rounded-md">01</span>
+                            <h4 class="font-extrabold text-[#0F172A] text-base mt-3 mb-1">Empathize</h4>
+                            <p class="text-xs text-[#475569] leading-relaxed">Wawancara mendalam, observasi BPS 1.050+ entitas, dan riset inklusif disabilitas rungu.</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold font-mono text-[#1066FF] bg-[#E0EEFE] px-2 py-0.5 rounded-md">02</span>
+                            <h4 class="font-extrabold text-[#0F172A] text-base mt-3 mb-1">Define</h4>
+                            <p class="text-xs text-[#475569] leading-relaxed">Penyusunan User Persona, Empathy Map, dan penajaman Problem Statement terukur.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold font-mono text-[#1066FF] bg-[#E0EEFE] px-2 py-0.5 rounded-md">03</span>
+                            <h4 class="font-extrabold text-[#0F172A] text-base mt-3 mb-1">Ideate</h4>
+                            <p class="text-xs text-[#475569] leading-relaxed">Information Architecture (IA), User Flow, serta sketsa Low-Fidelity &amp; Crazy 8's.</p>
+                        </div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold font-mono text-[#1066FF] bg-[#E0EEFE] px-2 py-0.5 rounded-md">04</span>
+                            <h4 class="font-extrabold text-[#0F172A] text-base mt-3 mb-1">Prototype</h4>
+                            <p class="text-xs text-[#475569] leading-relaxed">Desain High-Fidelity Figma, Design Tokens, komponen interaktif, dan standar WCAG.</p>
+                        </div>
+                    </div>
+                    <!-- Step 5 -->
+                    <div class="p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold font-mono text-[#1066FF] bg-[#E0EEFE] px-2 py-0.5 rounded-md">05</span>
+                            <h4 class="font-extrabold text-[#0F172A] text-base mt-3 mb-1">Testing</h4>
+                            <p class="text-xs text-[#475569] leading-relaxed">Pengujian SUS skor 82.3 (Grade A), Task Completion Rate 94%, dan iterasi perbaikan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== CURVED ARC CAROUSEL (Ariq Arvy Signature) ==================== -->
+    <section class="py-20 relative z-10 bg-[#F5F8FE] overflow-hidden border-t border-[#E2E8F0]">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 mb-10 text-center">
+            <span class="text-xs font-bold tracking-widest text-[#1066FF] uppercase font-mono">EXPLORATIONS</span>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mt-1">Design &amp; System Artifacts Ribbon</h3>
+            <p class="text-[#475569] text-sm mt-2">Kartu berputar melengkung dinamis (parabola 3D) dan berakselerasi mengikuti momentum scroll.</p>
+        </div>
+
+        <!-- Arc Viewport -->
+        <div id="arcView" class="relative w-full h-72 overflow-hidden cursor-grab active:cursor-grabbing">
+            <div id="arcTrack" class="absolute left-0 top-1/2 -translate-y-1/2 flex items-center will-change-transform">
+                <!-- Arc Card 1 -->
+                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Mobile UI</span>
+                        <i class="fa-solid fa-mobile text-[#1066FF]"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#0F172A] text-sm">BISINDO Gesture Camera</h4>
+                        <p class="text-[11px] text-[#475569] mt-1">High-contrast accessibility screen for deaf learners.</p>
+                    </div>
+                    <div class="text-[10px] font-mono text-[#1066FF] font-bold">SUS Score: 82.3</div>
+                </div>
+                <!-- Arc Card 2 -->
+                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Design Tokens</span>
+                        <i class="fa-solid fa-palette text-[#1066FF]"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#0F172A] text-sm">STEAM-Craft Style Guide</h4>
+                        <p class="text-[11px] text-[#475569] mt-1">Color, typography, and atomic elevation tokens.</p>
+                    </div>
+                    <div class="text-[10px] font-mono text-[#1066FF] font-bold">Juara 2 DIMAS TI</div>
+                </div>
+                <!-- Arc Card 3 -->
+                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">C4ISR Radar</span>
+                        <i class="fa-solid fa-crosshairs text-amber-500"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#0F172A] text-sm">WAYANG Tactical Map</h4>
+                        <p class="text-[11px] text-[#475569] mt-1">Real-time OT/IT decoy threat grid visualizer.</p>
+                    </div>
+                    <div class="text-[10px] font-mono text-amber-600 font-bold">Kartika Cyber 2026</div>
+                </div>
+                <!-- Arc Card 4 -->
+                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Metrology UI</span>
+                        <i class="fa-solid fa-chart-area text-purple-600"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#0F172A] text-sm">VeriLab Bayesian Plots</h4>
+                        <p class="text-[11px] text-[#475569] mt-1">Interactive Gaussian Process 95% confidence bands.</p>
+                    </div>
+                    <div class="text-[10px] font-mono text-purple-600 font-bold">SHA-256 Audit</div>
+                </div>
+                <!-- Arc Card 5 -->
+                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">3D Viewport</span>
+                        <i class="fa-solid fa-cube text-emerald-600"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#0F172A] text-sm">MakerCraft WebGL Controls</h4>
+                        <p class="text-[11px] text-[#475569] mt-1">Parametric 3D CAD modeling studio controls.</p>
+                    </div>
+                    <div class="text-[10px] font-mono text-emerald-600 font-bold">Three.js Engine</div>
+                </div>
+                <!-- Arc Card 6 -->
+                <div class="arc-card w-64 h-52 rounded-2xl bg-white border border-[#CBD5E1] p-5 shadow-lg flex-shrink-0 mr-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF]">Sim Studio</span>
+                        <i class="fa-solid fa-atom text-[#1066FF]"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#0F172A] text-sm">SteamSim Physics Sliders</h4>
+                        <p class="text-[11px] text-[#475569] mt-1">Runge-Kutta numerical integrator telemetry.</p>
+                    </div>
+                    <div class="text-[10px] font-mono text-[#1066FF] font-bold">60 FPS Canvas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
 
     <!-- About Section (Bento Grid) -->
     <section id="about" class="py-24 relative z-10 border-t border-white/5 bg-darkSurface/40">
@@ -3274,6 +3910,328 @@
             tempDiv.innerHTML = latestGeneratedSummary;
             copyToClipboard(tempDiv.innerText, 'Ringkasan arsitektur solusi berhasil disalin!');
         }
-    </script>
+    
+
+    // ==========================================
+    // ARIQ ARVY ANIMATIONS & UI/UX SCRIPTS
+    // ==========================================
+
+    // 1. UI/UX Case Studies Data
+    const uiStudiesData = {
+        thisme: {
+            category: "Accessibility & Mobile App (DIMAS TI & GEMASTIK)",
+            title: '"This Me" — BISINDO Interactive Learning Application',
+            subtitle: "Medali Perak Juara 2 DIMAS TI Nasional & Finalis GEMASTIK XVIII",
+            metrics: [
+                { label: "SUS Score", val: "82.3 (Grade A)" },
+                { label: "WCAG Contrast", val: "AAA Standard" },
+                { label: "Target Audience", val: "Teman Tuli & Dengar" },
+                { label: "Deliverable", val: "Hi-Fi Figma Prototype" }
+            ],
+            problem: "Bahasa Isyarat Indonesia (BISINDO) sering kali sulit dipelajari secara mandiri oleh masyarakat umum karena kurangnya media interaktif berbasis pengenalan gestur real-time, serta antarmuka belajar yang ramah bagi pengguna disabilitas rungu.",
+            solution: "Menerapkan Design Thinking 5 Tahap dengan melibatkan komunitas Tuli. Menghasilkan sistem navigasi mobile berbasis kartu visual kontras tinggi, feedback getaran haptik, pemindai gestur kamera real-time berakurasi tinggi, serta alur micro-learning gamified yang membuat pengguna konsisten belajar tanpa kelelahan kognitif.",
+            impact: "Meraih Medali Perak (Juara 2) DIMAS TI Nasional dan Lolos sebagai Finalis GEMASTIK XVIII Divisi UX Design. Hasil uji System Usability Scale (SUS) memperoleh skor 82,3 (kategori Excellent / Grade A) dengan completion rate tugas pengguna sebesar 94%.",
+            tags: ["Figma", "User Journey", "SUS Testing", "WCAG AAA", "Accessibility", "Computer Vision"],
+            links: [
+                { label: "Tonton Presentasi GEMASTIK", url: "https://youtu.be/ajHN5r6y010", icon: "fa-brands fa-youtube", primary: true }
+            ]
+        },
+        steamcraft: {
+            category: "Design System & Web App (Juara 2 DIMAS TI)",
+            title: "STEAM-Craft — Scalable Design System & Multi-Module Portal",
+            subtitle: "Sistem Desain Antarmuka Terpadu untuk 13 Proyek Riset STEAM",
+            metrics: [
+                { label: "Design Tokens", val: "200+ Atoms" },
+                { label: "Riset Terintegrasi", val: "13 Sub-Modul" },
+                { label: "Rubrik Penilaian", val: "4 Pilar AI" },
+                { label: "Penghargaan", val: "Juara 2 DIMAS TI" }
+            ],
+            problem: "Mengintegrasikan 13 proyek penelitian multidisiplin ke dalam satu ekosistem web tanpa membuat pengguna merasa tersesat dalam kerumitan menu atau navigasi yang tidak konsisten.",
+            solution: "Membangun Design System komprehensif dari nol di Figma: mulai dari tipografi modular, palet warna adaptif untuk mode terang dan gelap, komponen bento grid modular, hingga formulir penyerahan naskah saintifik dengan validasi interaktif.",
+            impact: "Berhasil mengantarkan tim meraih Juara 2 di ajang DIMAS TI 2026. Antarmuka terbukti intuitif di berbagai ukuran perangkat (desktop, tablet, mobile) dan mendukung transisi mulus ke mesin audit AI VeriLab.",
+            tags: ["Design System", "Figma Tokens", "Bento Grid", "Multi-Theme", "React 19"],
+            links: [
+                { label: "Buka Live App", url: "https://app.steamcraft.online", icon: "fa-solid fa-arrow-up-right-from-square", primary: true }
+            ]
+        },
+        wayang: {
+            category: "Tactical Military & Cyber Ergonomics",
+            title: "WAYANG C4ISR — High-Stress Tactical Defense Interface",
+            subtitle: "Kartika Cyber Hackathon 2026 Command Dashboard",
+            metrics: [
+                { label: "Telemetri", val: "<50ms Latency" },
+                { label: "Kriptografi", val: "RFC 6962 Proof" },
+                { label: "Protokol", val: "Modbus / ICS" },
+                { label: "Fokus Ergonomi", val: "Low Cognitive Load" }
+            ],
+            problem: "Dalam situasi serangan siber terhadap infrastruktur kritis militer atau energi, operator berada dalam stres tinggi dan rawan melakukan kesalahan eksekusi jika dashboard pertahanan menampilkan data yang membingungkan.",
+            solution: "Merancang antarmuka C4ISR taktis dengan hierarki visual terfokus: indikator radar ancaman berwarna tegas, visualisasi rantai audit forensik berbasis Merkle Tree anti-manipulasi, serta tombol aksi karantina instan via nftables dengan konfirmasi visual yang aman.",
+            impact: "Mendukung kelancaran uji coba 55 automated integration tests pada platform WAYANG di Kartika Cyber Hackathon 2026 dengan efisiensi respon triase insiden yang terukur.",
+            tags: ["Tactical UI", "Human Factors", "Dark Ergonomics", "Threat Radar", "Merkle Proof"],
+            links: [
+                { label: "Buka C4ISR Live", url: "https://cyber.steamcraft.online", icon: "fa-solid fa-crosshairs", primary: true }
+            ]
+        },
+        verilab: {
+            category: "Scientific Data Visualization & Metrology",
+            title: "VeriLab AI — Bayesian Confidence & Laboratory Studio",
+            subtitle: "Antarmuka Validasi Integritas Data Eksperimen Berbasis Gaussian Process",
+            metrics: [
+                { label: "Confidence Band", val: "95% Bayes Interval" },
+                { label: "Data Input", val: "Drag & Drop CSV" },
+                { label: "Verifikasi", val: "SHA-256 Digest" },
+                { label: "Output", val: "PDF Certificate" }
+            ],
+            problem: "Peneliti sering kesulitan memvisualisasikan ketidakpastian pengukuran sensor dan anomali data kalibrasi metrologi secara intuitif tanpa harus membuat skrip plotting manual yang rumit.",
+            solution: "Mendesain interface studio laboratorium yang bersih dan responsif: drag-and-drop file CSV, render interaktif kurva pita kepercayaan 95% Gaussian Process Regression, slider sensitivitas Sobol, serta generator sertifikat ber-sidik jari kriptografis.",
+            impact: "Menghadirkan pengalaman audit saintifik setara instrumen metrologi standar industri yang dapat diakses langsung melalui browser.",
+            tags: ["Data Viz", "Bayesian Curves", "FastAPI Swagger", "PDF Export", "Interactive Canvas"],
+            links: [
+                { label: "Buka VeriLab Studio", url: "https://verilab.steamcraft.online", icon: "fa-solid fa-flask", primary: true }
+            ]
+        }
+    };
+
+    function openUiModal(key) {
+        const data = uiStudiesData[key];
+        if (!data) return;
+
+        document.getElementById('ui-modal-category').textContent = data.category;
+        document.getElementById('ui-modal-title').textContent = data.title;
+        document.getElementById('ui-modal-subtitle').textContent = data.subtitle;
+        document.getElementById('ui-modal-problem').textContent = data.problem;
+        document.getElementById('ui-modal-solution').textContent = data.solution;
+        document.getElementById('ui-modal-impact').textContent = data.impact;
+
+        // Metrics
+        const mContainer = document.getElementById('ui-modal-metrics');
+        mContainer.innerHTML = data.metrics.map(m => `
+            <div class="p-2.5 rounded-xl bg-white border border-[#CBD5E1]">
+                <div class="text-base font-black text-[#1066FF] font-mono">${m.val}</div>
+                <div class="text-[10px] text-[#475569] font-medium uppercase mt-0.5">${m.label}</div>
+            </div>
+        `).join('');
+
+        // Tags
+        const tContainer = document.getElementById('ui-modal-tags');
+        tContainer.innerHTML = data.tags.map(t => `
+            <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#E0EEFE] text-[#1066FF]">${t}</span>
+        `).join('');
+
+        // Actions
+        const aContainer = document.getElementById('ui-modal-actions');
+        aContainer.innerHTML = data.links.map(l => `
+            <a href="${l.url}" target="_blank" class="py-2.5 px-4 rounded-xl ${l.primary ? 'bg-[#1066FF] text-white hover:bg-[#0A5AF0]' : 'bg-[#F5F8FE] text-[#1066FF] border border-[#CBD5E1]'} text-xs font-bold transition-all shadow-md flex items-center gap-2">
+                <i class="${l.icon}"></i>
+                <span>${l.label}</span>
+            </a>
+        `).join('');
+
+        const modal = document.getElementById('ui-modal');
+        const box = document.getElementById('ui-modal-box');
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        box.classList.remove('scale-95');
+        box.classList.add('scale-100');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeUiModal() {
+        const modal = document.getElementById('ui-modal');
+        const box = document.getElementById('ui-modal-box');
+        if (!modal) return;
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        box.classList.remove('scale-100');
+        box.classList.add('scale-95');
+        document.body.style.overflow = 'auto';
+    }
+
+    // 2. Ariq Arvy Card-Dealing Intro Animation on Load
+    function runCardDealingIntro() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const hero = document.getElementById('home');
+        if (!hero) return;
+        const tiles = Array.from(hero.querySelectorAll('.hero-tile'));
+        if (tiles.length === 0) return;
+
+        const hr = hero.getBoundingClientRect();
+        const cx = hr.width / 2;
+        const cy = hr.height / 2;
+
+        const DEAL = 100, APPEAR = 500, HOLD = 250, SPREAD = 900;
+        const spreadAt = (tiles.length - 1) * DEAL + APPEAR + HOLD;
+        const rot = [-9, 6, -5, 8];
+
+        tiles.forEach((el, i) => {
+            const r = el.getBoundingClientRect();
+            const curCenterX = (r.left - hr.left) + r.width / 2;
+            const curCenterY = (r.top - hr.top) + r.height / 2;
+            const dx = cx - curCenterX;
+            const dy = cy - curCenterY;
+            const rDeg = rot[i % rot.length];
+
+            const start = i * DEAL;
+            const dur = spreadAt + SPREAD - start;
+            const stacked = `translate(${dx}px, ${dy}px) rotate(${rDeg}deg) scale(1.15)`;
+
+            el.animate([
+                { offset: 0, opacity: 0, transform: `translate(${dx}px, ${dy + 40}px) rotate(${rDeg * 1.5}deg) scale(0.85)`, easing: 'cubic-bezier(.2,.7,.2,1)' },
+                { offset: APPEAR / dur, opacity: 1, transform: stacked },
+                { offset: (spreadAt - start) / dur, opacity: 1, transform: stacked, easing: 'cubic-bezier(.7,0,.15,1)' },
+                { offset: 1, opacity: 1, transform: 'translate(0, 0) rotate(0deg) scale(1)' }
+            ], { duration: dur, delay: start, fill: 'both' });
+        });
+    }
+
+    // 3. Ariq Arvy Parabolic Arc Carousel Physics
+    function initArcCarousel() {
+        const arcView = document.getElementById('arcView');
+        const arcTrack = document.getElementById('arcTrack');
+        if (!arcView || !arcTrack) return;
+
+        let arcCards = Array.from(arcTrack.children);
+        let arcStep = 0, arcTotal = 0, arcW = 0, arcCurve = 0, arcOffset = 0;
+        let arcBoost = 0, arcLastY = window.scrollY, arcLast = 0, arcOn = true;
+        const ARC_SPEED = 38;
+
+        function arcSetup() {
+            const card = arcTrack.querySelector('.arc-card');
+            if (!card) return;
+            const style = window.getComputedStyle(card);
+            const mr = parseFloat(style.marginRight) || 16;
+            arcW = card.offsetWidth;
+            arcStep = arcW + mr;
+            
+            // Clone cards to ensure infinite track loop
+            const needed = Math.ceil((window.innerWidth * 2) / (arcCards.length * arcStep));
+            if (arcTrack.querySelectorAll('.arc-clone').length === 0) {
+                const originals = [...arcCards];
+                for (let k = 0; k < needed; k++) {
+                    originals.forEach(c => {
+                        const clone = c.cloneNode(true);
+                        clone.classList.add('arc-clone');
+                        arcTrack.appendChild(clone);
+                    });
+                }
+            }
+            arcCards = Array.from(arcTrack.children);
+            arcTotal = arcCards.length * arcStep;
+            arcCurve = arcW * 0.38;
+        }
+
+        function arcRender() {
+            const half = arcView.clientWidth / 2;
+            const radius = Math.max(half, arcW * 1.8);
+            for (let i = 0; i < arcCards.length; i++) {
+                const x = ((i * arcStep + arcOffset) % arcTotal + arcTotal) % arcTotal - arcStep;
+                const u = (x + arcW / 2 - half) / radius;
+                arcCards[i].style.transform = `translate3d(${x.toFixed(1)}px, ${(arcCurve * u * u).toFixed(1)}px, 0) rotate(${(u * 9).toFixed(2)}deg)`;
+            }
+        }
+
+        function arcTick(t) {
+            if (!arcOn) { arcLast = 0; return; }
+            const dt = arcLast ? Math.min(t - arcLast, 64) / 1000 : 0;
+            arcLast = t;
+            arcOffset -= (ARC_SPEED + arcBoost) * dt;
+            arcBoost *= 0.94;
+            arcRender();
+            requestAnimationFrame(arcTick);
+        }
+
+        arcSetup();
+        arcRender();
+        window.addEventListener('resize', () => { arcSetup(); arcRender(); });
+
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            arcBoost = Math.min(450, arcBoost + Math.abs(y - arcLastY) * 2.8);
+            arcLastY = y;
+        }, { passive: true });
+
+        requestAnimationFrame(arcTick);
+    }
+
+    // 4. Shrinking Pill Navbar on Scroll
+    function initPillNav() {
+        const nav = document.getElementById('main-navbar');
+        if (!nav) return;
+        function onScroll() {
+            nav.classList.toggle('scrolled', window.scrollY > 30);
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    // 5. Theme Switcher (Ariq Arvy Light Studio vs Dark Cyber)
+    function toggleTheme() {
+        const root = document.documentElement;
+        const icon = document.getElementById('themeIcon');
+        const isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        if (icon) {
+            icon.className = isDark ? 'fa-solid fa-sun text-sm text-amber-400' : 'fa-solid fa-moon text-sm text-[#1066FF]';
+        }
+    }
+
+    // Load saved theme or default to Ariq Arvy Light Studio
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.className = 'fa-solid fa-sun text-sm text-amber-400';
+    }
+
+    // Run animations on DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(runCardDealingIntro, 300);
+        initArcCarousel();
+        initPillNav();
+    });
+
+</script>
+
+    <!-- UI/UX Case Study Modal Dialog -->
+    <div id="ui-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md" onclick="closeUiModal()"></div>
+        <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl border border-[#CBD5E1] shadow-2xl p-6 sm:p-10 z-10 text-[#0F172A] transform scale-95 transition-transform duration-300" id="ui-modal-box">
+            <div class="flex items-start justify-between pb-5 border-b border-[#E2E8F0]">
+                <div>
+                    <span id="ui-modal-category" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E0EEFE] text-[#1066FF] inline-block mb-2">Category</span>
+                    <h3 id="ui-modal-title" class="text-2xl sm:text-3xl font-black text-[#0F172A]">Title</h3>
+                    <p id="ui-modal-subtitle" class="text-sm text-[#475569] mt-1">Subtitle</p>
+                </div>
+                <button onclick="closeUiModal()" class="w-10 h-10 rounded-full bg-[#F5F8FE] hover:bg-[#E0EEFE] text-[#475569] hover:text-[#1066FF] flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="py-6 space-y-6">
+                <!-- Metrics Row -->
+                <div id="ui-modal-metrics" class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-[#F5F8FE] border border-[#E2E8F0] text-center"></div>
+
+                <!-- Case Study Narrative -->
+                <div>
+                    <h4 class="text-sm font-extrabold uppercase tracking-wider text-[#1066FF] mb-2 font-mono">01. Latar Belakang & Problem Statement</h4>
+                    <p id="ui-modal-problem" class="text-sm text-[#334155] leading-relaxed"></p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-extrabold uppercase tracking-wider text-[#1066FF] mb-2 font-mono">02. Solusi Desain & Arsitektur Pengguna</h4>
+                    <p id="ui-modal-solution" class="text-sm text-[#334155] leading-relaxed"></p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-extrabold uppercase tracking-wider text-[#1066FF] mb-2 font-mono">03. Hasil Pengujian Usability & Dampak</h4>
+                    <p id="ui-modal-impact" class="text-sm text-[#334155] leading-relaxed"></p>
+                </div>
+            </div>
+
+            <div class="pt-5 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3">
+                <div id="ui-modal-tags" class="flex flex-wrap gap-2"></div>
+                <div id="ui-modal-actions" class="flex items-center gap-3"></div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

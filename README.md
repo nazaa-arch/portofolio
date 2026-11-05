@@ -8,6 +8,26 @@
 
 ---
 
+
+## 🎨 Showcase UI/UX & Product Design (National Award Winners)
+
+Platform portofolio ini kini mengadopsi estetika **Electric Cobalt & Studio Sky Blue** (terinspirasi dari standar desain art-direction berkelas dunia) lengkap dengan interaksi mikro fisika, animasi *card-dealing intro*, dan *curved arc carousel*.
+
+### Karya Unggulan Desain UI/UX:
+1. **"This Me" — Aplikasi Mobile Pembelajaran BISINDO**
+   - 🥈 **Medali Perak (Juara 2) DIMAS TI Nasional & Finalis GEMASTIK XVIII** (Puspresnas).
+   - 📊 Evaluasi Usability: Skor **SUS 82.3 (Grade A / Excellent)**.
+   - ♿ Standar Aksesibilitas: **WCAG 2.1 AAA** untuk komunitas Teman Tuli & Dengar.
+2. **STEAM-Craft Design System & Multi-Platform Web Studio**
+   - 🥈 **Juara 2 DIMAS TI 2026**.
+   - Arsitektur token desain modular, bento grid adaptif, dan rubrik analitik AI 4 pilar.
+3. **WAYANG C4ISR Tactical Military & Cyber Deception Interface**
+   - *Kartika Cyber Hackathon 2026*.
+   - Antarmuka komando berdensitas data tinggi dengan fokus *zero cognitive overload under stress*.
+4. **VeriLab AI Scientific Metrology Studio**
+   - Visualisasi Bayesian Confidence Band 95% dan validator drag-and-drop bersertifikat SHA-256.
+
+---
 ## 🚀 Proyek Unggulan & Ekosistem Inovasi
 
 ### 1. [WAYANG – Adaptive IT/OT Deception Grid](https://cyber.steamcraft.online)
