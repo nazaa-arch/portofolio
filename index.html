@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -204,6 +205,7 @@
                     <a href="#home" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Beranda</a>
                     <a href="#about" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Tentang</a>
                     <a href="#experience" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Pengalaman</a>
+                    <a href="#tech-stack" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Tech Stack</a>
                     <a href="#projects" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Proyek</a>
                     <a href="#skills" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Keahlian</a>
                     <a href="#education" class="px-4 py-2 rounded-full hover:text-white hover:bg-white/5 transition-all">Pendidikan & Prestasi</a>
@@ -681,17 +683,283 @@
         </div>
     </section>
 
+    
+    <!-- Tech Stack & Stats Showcase (Exact design from user reference) -->
+    <section id="tech-stack" class="py-20 relative z-10 border-t border-white/5 bg-[#090d16]/90 bg-grid-pattern overflow-hidden">
+        <!-- Ambient orbs matching screenshot -->
+        <div class="absolute -left-20 top-1/4 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -right-20 top-1/2 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
+            
+            <!-- 4 Top Stat Cards (Top row matching screenshot) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16">
+                <!-- Stat 1 -->
+                <div class="bg-[#0c1322]/85 backdrop-blur-md border border-blue-500/15 rounded-2xl py-5 px-6 text-center hover:border-cyan-400/40 hover:bg-[#111a2e] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[#38bdf8] font-mono tracking-tight">5+</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Years Experience</div>
+                </div>
+                <!-- Stat 2 -->
+                <div class="bg-[#0c1322]/85 backdrop-blur-md border border-blue-500/15 rounded-2xl py-5 px-6 text-center hover:border-cyan-400/40 hover:bg-[#111a2e] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[#38bdf8] font-mono tracking-tight">15+</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Apps Delivered</div>
+                </div>
+                <!-- Stat 3 -->
+                <div class="bg-[#0c1322]/85 backdrop-blur-md border border-blue-500/15 rounded-2xl py-5 px-6 text-center hover:border-cyan-400/40 hover:bg-[#111a2e] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[#38bdf8] font-mono tracking-tight">14</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Tech Stacks</div>
+                </div>
+                <!-- Stat 4 -->
+                <div class="bg-[#0c1322]/85 backdrop-blur-md border border-blue-500/15 rounded-2xl py-5 px-6 text-center hover:border-cyan-400/40 hover:bg-[#111a2e] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[#38bdf8] font-mono tracking-tight">3.84</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Academic GPA</div>
+                </div>
+            </div>
+
+            <!-- Header & Filter Tabs -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-9 gap-4">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-[#f59e0b] uppercase font-mono">TECH STACK</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1.5">Technologies I Work With</h2>
+                    <div class="w-12 h-1 bg-gradient-to-r from-amber-500 to-cyan-400 rounded-full my-3"></div>
+                    <p class="text-gray-400 text-sm max-w-xl leading-relaxed">
+                        A collection of languages, frameworks, and tools I use to build and optimize digital solutions.
+                    </p>
+                </div>
+                
+                <!-- Category Switcher Pills -->
+                <div class="flex items-center gap-2 bg-[#0c1322]/85 p-1.5 rounded-xl border border-white/10 self-start md:self-auto">
+                    <button onclick="filterTechCategory('web')" id="tech-tab-web" class="tech-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white bg-blue-600/30 border border-blue-500/30 transition-all">
+                        Web & Backend (14)
+                    </button>
+                    <button onclick="filterTechCategory('ai')" id="tech-tab-ai" class="tech-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-all">
+                        AI & Data Science (14)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tech Cards Grid: Web & Backend (Default - Exact 14 items matching screenshot) -->
+            <div id="tech-grid-web" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3.5 sm:gap-4 max-w-6xl mx-auto transition-all duration-300">
+                <!-- 1. Golang -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-go-original-wordmark colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Golang</span>
+                </div>
+                <!-- 2. PHP -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-php-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">PHP</span>
+                </div>
+                <!-- 3. React JS -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-react-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">React JS</span>
+                </div>
+                <!-- 4. Nest JS -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-nestjs-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Nest JS</span>
+                </div>
+                <!-- 5. Next JS -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-nextjs-plain text-3xl sm:text-4xl text-white group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Next JS</span>
+                </div>
+                <!-- 6. Laravel -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-laravel-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Laravel</span>
+                </div>
+                <!-- 7. Python -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-python-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Python</span>
+                </div>
+
+                <!-- Row 2 -->
+                <!-- 8. Django -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-django-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Django</span>
+                </div>
+                <!-- 9. Wordpress -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-wordpress-plain text-3xl sm:text-4xl text-gray-300 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Wordpress</span>
+                </div>
+                <!-- 10. MySQL -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-mysql-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">MySQL</span>
+                </div>
+                <!-- 11. PostgreSQL -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-postgresql-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">PostgreSQL</span>
+                </div>
+                <!-- 12. MongoDB -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-mongodb-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">MongoDB</span>
+                </div>
+                <!-- 13. Docker -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-docker-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Docker</span>
+                </div>
+                <!-- 14. Git -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-git-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Git</span>
+                </div>
+            </div>
+
+            <!-- Tech Cards Grid: AI & Data Science (14 cards for Naza's CV specialization) -->
+            <div id="tech-grid-ai" class="hidden grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3.5 sm:gap-4 max-w-6xl mx-auto transition-all duration-300">
+                <!-- 1. Python -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-python-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Python</span>
+                </div>
+                <!-- 2. PyTorch -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-pytorch-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">PyTorch</span>
+                </div>
+                <!-- 3. FastAPI -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-fastapi-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">FastAPI</span>
+                </div>
+                <!-- 4. TypeScript -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-typescript-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">TypeScript</span>
+                </div>
+                <!-- 5. React 19 -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-react-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">React 19</span>
+                </div>
+                <!-- 6. Tailwind CSS -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-tailwindcss-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Tailwind CSS</span>
+                </div>
+                <!-- 7. Docker -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-docker-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Docker</span>
+                </div>
+
+                <!-- Row 2 -->
+                <!-- 8. PostgreSQL -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-postgresql-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">PostgreSQL</span>
+                </div>
+                <!-- 9. Three.js -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-threejs-original text-3xl sm:text-4xl text-white group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Three.js</span>
+                </div>
+                <!-- 10. R / GWR -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-r-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">R / GWR</span>
+                </div>
+                <!-- 11. Scikit-Learn -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="fa-solid fa-brain text-amber-400 text-3xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Scikit-Learn</span>
+                </div>
+                <!-- 12. Modbus & OT -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-cyan-400 text-3xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Modbus / ICS</span>
+                </div>
+                <!-- 13. Next JS -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-nextjs-plain text-3xl sm:text-4xl text-white group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Next JS</span>
+                </div>
+                <!-- 14. Git & CI/CD -->
+                <div class="bg-[#0c1322]/85 hover:bg-[#121c32] border border-blue-500/15 hover:border-cyan-400/50 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(56,189,248,0.22)] group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <i class="devicon-git-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Git & CI/CD</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
     <!-- Projects Portfolio Section (Interactive & Filterable) -->
     <section id="projects" class="py-24 relative z-10 border-t border-white/5 bg-darkSurface/30">
         <div class="max-w-7xl mx-auto px-5 sm:px-8">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
                 <div>
-                    <div class="text-xs font-mono font-bold tracking-widest text-accentPurple uppercase mb-2">// KARYA & PORTOFOLIO</div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                        Proyek Unggulan <span class="gradient-text-primary">Data & AI</span> serta <span class="gradient-text-cyan">Desain UI/UX</span>
-                    </h2>
-                    <p class="text-gray-400 text-sm mt-2 max-w-xl">
-                        Daftar 15 karya unggulan: platform pertahanan siber WAYANG (Kartika Cyber Hackathon 2026), ekosistem riset terpadu STEAM-Craft (PaperCraft AI, SteamSim Lab, MakerCraft 3D, SteamGeo Intelligence, SteamArena), VeriLab AI, dan riset sains data terapan.
+                    <span class="text-xs font-bold tracking-widest text-[#f59e0b] uppercase font-mono">PROJECTS</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1.5">What I've Built</h2>
+                    <div class="w-12 h-1 bg-gradient-to-r from-amber-500 to-cyan-400 rounded-full my-3"></div>
+                    <p class="text-gray-400 text-sm max-w-xl leading-relaxed">
+                        A curated showcase of 15 flagship systems & applied research platforms across Cyber Deception Defense, Cloud AI, Simulation Studios, and Spatial Data Science.
                     </p>
                 </div>
 
