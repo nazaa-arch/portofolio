@@ -110,11 +110,6 @@
             color: #0F172A !important;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-card:hover {
-            border-color: #1066FF !important;
-            transform: translateY(-4px);
-            box-shadow: 0 16px 36px -8px rgba(16, 102, 255, 0.22) !important;
-        }
 
         /* Glass Nav */
         .glass-nav {
@@ -288,6 +283,141 @@
             color: #FFFFFF !important;
         }
 
+        /* Polished motion system: restrained reveals, crisp focus, and accessible motion. */
+        :where(a, button, [role="button"]) {
+            -webkit-tap-highlight-color: transparent;
+        }
+        :where(a, button, [role="button"]):focus-visible {
+            outline: 3px solid rgba(16, 102, 255, .55);
+            outline-offset: 4px;
+        }
+        .glass-card, .glass-card-static, .ribbon-card, .project-item {
+            transition: transform .32s cubic-bezier(.2,.75,.25,1), box-shadow .32s ease, border-color .32s ease;
+        }
+        .glass-card:hover, .project-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 102, 255, .34) !important;
+            box-shadow: 0 18px 42px -18px rgba(16, 102, 255, .3), 0 4px 12px rgba(15, 23, 42, .05) !important;
+        }
+        .motion-ready .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        .motion-ready .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-lines i { animation: lineBreath 8s ease-in-out infinite alternate; }
+        .hero-lines i:nth-child(2) { animation-delay: -3s; }
+        .hero-lines i:nth-child(3) { animation-delay: -5s; }
+        @keyframes lineBreath {
+            from { opacity: .38; }
+            to { opacity: .9; }
+        }
+        /* Scroll progress rail */
+        #scroll-progress-bar {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 100%;
+            transform-origin: 0 50%;
+            transform: scaleX(0);
+            background: linear-gradient(90deg, #1066FF, #4F96F9);
+            transition: transform .12s linear;
+            pointer-events: none;
+        }
+        /* Active nav pill */
+        #nav-links a.is-active {
+            background: #E0EEFE;
+            color: #1066FF;
+            box-shadow: inset 0 0 0 1px #BADDFC;
+        }
+        /* Back to top */
+        #back-to-top {
+            opacity: 0;
+            transform: translateY(14px) scale(.9);
+            pointer-events: none;
+        }
+        #back-to-top.is-shown {
+            opacity: 1;
+            transform: none;
+            pointer-events: auto;
+        }
+        /* ---- Layout & anchor rhythm ---- */
+        html {
+            scroll-padding-top: 92px;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+        h1, h2, h3 { text-wrap: balance; }
+        p, li { text-wrap: pretty; }
+        .font-mono { font-variant-numeric: tabular-nums; }
+
+        /* ---- Mobile drawer entrance ---- */
+        #mobile-menu:not(.hidden) {
+            animation: drawerIn .34s cubic-bezier(.2,.75,.25,1) both;
+        }
+        @keyframes drawerIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---- Hero stat cards: dealt in on load ---- */
+        .hero-stat {
+            will-change: transform, opacity;
+            transition: transform .32s cubic-bezier(.2,.75,.25,1), box-shadow .32s ease, border-color .32s ease;
+        }
+        .hero-stat:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 102, 255, .38) !important;
+            box-shadow: 0 18px 40px -18px rgba(16, 102, 255, .32) !important;
+        }
+
+        /* Animated skill meters: fills grow once the section reveals. */
+        .skill-bar {
+            transform-origin: 0 50%;
+            transition: transform 1s cubic-bezier(.2,.75,.25,1) .12s;
+        }
+        .motion-ready .reveal-on-scroll:not(.is-visible) .skill-bar {
+            transform: scaleX(0);
+        }
+        /* Tech grid category switch */
+        .tech-grid-in { animation: techGridIn .42s cubic-bezier(.2,.75,.25,1) both; }
+        @keyframes techGridIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Nav pill + link easing */
+        #nav-links a {
+            transition: background-color .28s ease, color .28s ease, box-shadow .28s ease;
+        }
+        /* Project banner sheen on hover */
+        .project-item .h-44 > div:first-child {
+            transition: transform .5s cubic-bezier(.2,.75,.25,1);
+        }
+        .project-item:hover .h-44 > div:first-child {
+            transform: scale(1.06);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+            .motion-ready .reveal-on-scroll { opacity: 1; transform: none; }
+            .ribbon-track { animation: none !important; }
+            .hero-stat { transform: none !important; }
+            #mobile-menu:not(.hidden) { animation: none !important; }
+            .skill-bar { transform: none !important; transition: none !important; }
+            .tech-grid-in { animation: none !important; }
+            .project-item:hover .h-44 > div:first-child { transform: none !important; }
+        }
+
     </style>
 
 </head>
@@ -299,13 +429,14 @@
     
 
     <!-- Toast Notification for Copy -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-5 py-3 rounded-xl bg-[#0F172A] border border-[#1066FF] text-white shadow-2xl rounded-2xl">
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#0F172A] border border-[#1066FF] text-white shadow-2xl">
         <i class="fa-solid fa-circle-check text-accentEmerald text-lg"></i>
         <span id="toast-message" class="text-sm font-medium">Berhasil disalin ke clipboard!</span>
     </div>
 
     <!-- Navigation Bar -->
     <nav class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300" id="main-navbar">
+        <div id="scroll-progress-bar" aria-hidden="true"></div>
         <div class="max-w-7xl mx-auto px-5 sm:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
@@ -323,7 +454,7 @@
                 </a>
 
                 <!-- Desktop Menu (Curated, Centered, No Wrapping) -->
-                <div class="hidden lg:flex items-center gap-1 bg-[#F5F8FE] px-3 py-1.5 rounded-full border border-[#E2E8F0] text-xs font-bold text-[#475569] shadow-sm whitespace-nowrap flex-shrink-0">
+                <div id="nav-links" class="hidden lg:flex items-center gap-1 bg-[#F5F8FE] px-3 py-1.5 rounded-full border border-[#E2E8F0] text-xs font-bold text-[#475569] shadow-sm whitespace-nowrap flex-shrink-0">
                     <a href="#home" class="px-3 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE] transition-all whitespace-nowrap">Beranda</a>
                     <a href="#research" class="px-3 py-1.5 rounded-full hover:text-[#1066FF] hover:bg-[#E0EEFE] transition-all flex items-center gap-1.5 whitespace-nowrap">
                         <i class="fa-solid fa-flask text-xs"></i> Riset &amp; AI
@@ -366,7 +497,7 @@
                 <a href="#projects" class="mobile-link py-2 text-[#334155] hover:text-[#1066FF] border-b border-[#E2E8F0] font-semibold">Portofolio Proyek</a>
                 <a href="#skills" class="mobile-link py-2 text-[#334155] hover:text-[#1066FF] border-b border-[#E2E8F0] font-semibold">Keahlian & Tools</a>
                 <a href="#education" class="mobile-link py-2 text-[#334155] hover:text-[#1066FF] border-b border-[#E2E8F0] font-semibold">Pendidikan & Prestasi</a>
-                <a href="#ai-consultant" class="mobile-link py-2 text-accentCyan hover:text-white border-b border-[#E2E8F0] flex items-center gap-2">
+                <a href="#ai-consultant" class="mobile-link py-2 text-[#1066FF] hover:text-[#0A5AF0] border-b border-[#E2E8F0] flex items-center gap-2">
                     <i class="fa-solid fa-sparkles"></i> AI Project Consultant
                 </a>
                 <div class="pt-2 flex flex-col gap-2">
@@ -381,6 +512,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- Hero Section -->
     <section id="home" class="min-h-screen pt-32 pb-20 relative flex items-center z-10 overflow-hidden" style="background: radial-gradient(120% 90% at 50% 0%, #BADDFC 0%, #E0EEFE 38%, #F5F8FE 72%);">
         <!-- Ariq Arvy Signature Hero Lines -->
@@ -395,7 +527,7 @@
                 <!-- Left Content (7 Cols) -->
                 <div class="lg:col-span-7 text-center lg:text-left">
                     <!-- Status Pill -->
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accentIndigo/10 border border-accentIndigo/30 text-xs font-medium text-indigo-300 mb-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accentIndigo/10 border border-accentIndigo/30 text-xs font-medium text-[#1E3A8A] mb-6">
                         <span class="w-2.5 h-2.5 rounded-full bg-accentEmerald animate-pulse"></span>
                         Mahasiswa Sains Data UNESA &bull; Terbuka untuk Kolaborasi & Proyek
                     </div>
@@ -408,7 +540,7 @@
                     </h1>
 
                     <!-- Subtitle / Bio -->
-                    <p class="text-base sm:text-lg text-[#334155] mb-8 max-w-2xl leading-relaxed text-base font-normal mx-auto lg:mx-0">
+                    <p class="text-base sm:text-lg text-[#334155] mb-8 max-w-2xl leading-relaxed font-normal mx-auto lg:mx-0">
                         Mahasiswa <strong class="text-[#0F172A] font-bold">Sains Data di UNESA (IPK 3.84 / 4.00)</strong> dengan keahlian praktis dalam 
                         <span class="text-accentCyan font-semibold">Python</span>, 
                         <span class="text-accentPurple font-semibold">Analisis Statistik</span>, 
@@ -418,15 +550,15 @@
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-12">
-                        <a href="#projects" class="px-7 py-3.5 rounded-xl font-bold text-sm bg-[#1066FF] hover:bg-[#0A5AF0] text-white shadow-md hover:shadow-lg rounded-full transition-all flex items-center gap-2">
+                        <a href="#projects" class="px-7 py-3.5 rounded-full font-bold text-sm bg-[#1066FF] hover:bg-[#0A5AF0] text-white shadow-md hover:shadow-lg transition-all flex items-center gap-2">
                             <span>Eksplorasi Proyek</span>
                             <i class="fa-solid fa-arrow-right-long"></i>
                         </a>
-                        <a href="CV_Muhammad_Naza_Firmansyah.pdf" download="CV_Muhammad_Naza_Firmansyah.pdf" class="px-6 py-3.5 rounded-xl font-semibold text-sm bg-white border border-[#CBD5E1] hover:border-[#1066FF] text-[#0F172A] shadow-sm rounded-full transition-all flex items-center gap-2">
+                        <a href="CV_Muhammad_Naza_Firmansyah.pdf" download="CV_Muhammad_Naza_Firmansyah.pdf" class="px-6 py-3.5 rounded-full font-semibold text-sm bg-white border border-[#CBD5E1] hover:border-[#1066FF] text-[#0F172A] shadow-sm transition-all flex items-center gap-2">
                             <i class="fa-solid fa-file-pdf text-red-400"></i>
                             <span>Unduh CV (PDF)</span>
                         </a>
-                        <a href="https://wa.me/6285236019625?text=Halo%20Naza,%20saya%20tertarik%20berdiskusi%20mengenai%20proyek/peluang%20kerja..." target="_blank" class="px-6 py-3.5 rounded-xl font-semibold text-sm bg-[#E0EEFE] border border-[#BADDFC] hover:bg-[#DBE8FC] text-[#1066FF] shadow-sm rounded-full transition-all flex items-center gap-2">
+                        <a href="https://wa.me/6285236019625?text=Halo%20Naza,%20saya%20tertarik%20berdiskusi%20mengenai%20proyek/peluang%20kerja..." target="_blank" class="px-6 py-3.5 rounded-full font-semibold text-sm bg-[#E0EEFE] border border-[#BADDFC] hover:bg-[#DBE8FC] text-[#1066FF] shadow-sm transition-all flex items-center gap-2">
                             <i class="fa-brands fa-whatsapp text-lg"></i>
                             <span>WhatsApp</span>
                         </a>
@@ -434,19 +566,19 @@
 
                     <!-- Highlights Stat Badges -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl mx-auto lg:mx-0">
-                        <div class="bg-white p-4 text-center border-l-4 border-[#1066FF] rounded-2xl shadow-sm border border-[#E2E8F0]">
-                            <div class="text-2xl font-black text-[#0F172A] font-mono">3.80<span class="text-accentBlue text-sm font-sans">/4.0</span></div>
+                        <div class="hero-stat bg-white p-4 text-center border-l-4 border-[#1066FF] rounded-2xl shadow-sm border border-[#E2E8F0]">
+                            <div class="text-2xl font-black text-[#0F172A] font-mono">3.84<span class="text-accentBlue text-sm font-sans">/4.0</span></div>
                             <div class="text-[11px] text-[#64748B] font-semibold uppercase tracking-wider mt-1">IPK Sains Data</div>
                         </div>
-                        <div class="bg-white p-4 text-center border-l-4 border-[#1E3A8A] rounded-2xl shadow-sm border border-[#E2E8F0]">
+                        <div class="hero-stat bg-white p-4 text-center border-l-4 border-[#1E3A8A] rounded-2xl shadow-sm border border-[#E2E8F0]">
                             <div class="text-2xl font-black text-[#0F172A] font-mono">1.050+</div>
                             <div class="text-[11px] text-[#64748B] font-semibold uppercase tracking-wider mt-1">Usaha BPS Disurvei</div>
                         </div>
-                        <div class="bg-white p-4 text-center border-l-4 border-[#0284C7] rounded-2xl shadow-sm border border-[#E2E8F0]">
+                        <div class="hero-stat bg-white p-4 text-center border-l-4 border-[#0284C7] rounded-2xl shadow-sm border border-[#E2E8F0]">
                             <div class="text-2xl font-black text-[#0F172A] font-mono">&gt;88%</div>
                             <div class="text-[11px] text-[#64748B] font-semibold uppercase tracking-wider mt-1">Akurasi NLP 7-Kelas</div>
                         </div>
-                        <div class="bg-white p-4 text-center border-l-4 border-emerald-500 rounded-2xl shadow-sm border border-[#E2E8F0]">
+                        <div class="hero-stat bg-white p-4 text-center border-l-4 border-emerald-500 rounded-2xl shadow-sm border border-[#E2E8F0]">
                             <div class="text-2xl font-black text-[#0F172A] font-mono">Juara 2</div>
                             <div class="text-[11px] text-[#64748B] font-semibold uppercase tracking-wider mt-1">DIMAS TI Nasional</div>
                         </div>
@@ -457,7 +589,7 @@
                 <div class="lg:col-span-5 flex justify-center">
                     <div class="relative w-72 sm:w-80 md:w-96">
                         <!-- Decorative orbital rings -->
-                        <div class="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-accentCyan via-accentIndigo to-pink-500 opacity-30 blur-2xl animate-pulse-slow"></div>
+                        <div class="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-accentCyan via-accentIndigo to-[#93C5FD] opacity-30 blur-2xl animate-pulse-slow"></div>
                         
                         <!-- Main Card -->
                         <div class="relative bg-white p-4 rounded-3xl border border-[#CBD5E1] shadow-xl overflow-hidden group">
@@ -490,7 +622,7 @@
                                 <a href="https://www.linkedin.com/in/nazafirman" target="_blank" class="hover:text-accentBlue transition-colors p-2" title="LinkedIn">
                                     <i class="fa-brands fa-linkedin text-base"></i>
                                 </a>
-                                <a href="https://github.com/nazaa-arch" target="_blank" class="hover:text-white transition-colors p-2" title="GitHub">
+                                <a href="https://github.com/nazaa-arch" target="_blank" class="hover:text-[#1066FF] transition-colors p-2" title="GitHub">
                                     <i class="fa-brands fa-github text-base"></i>
                                 </a>
                                 <a href="https://portofolionaza.steamcraft.online" target="_blank" class="hover:text-accentPurple transition-colors p-2" title="Live Website">
@@ -503,19 +635,19 @@
                         </div>
 
                         <!-- Floating Floating Pill: UNESA Data Science -->
-                        <div class="absolute -top-4 -left-4 sm:-left-6 px-4 py-2 rounded-2xl glass-card-static border border-accentBlue/30 shadow-xl flex items-center gap-2 text-xs font-bold text-white">
+                        <div class="absolute -top-4 -left-4 sm:-left-6 px-4 py-2 rounded-2xl glass-card-static border border-accentBlue/30 shadow-xl flex items-center gap-2 text-xs font-bold text-[#0F172A]">
                             <span class="w-2.5 h-2.5 rounded-full bg-accentBlue animate-ping"></span>
                             <span>Sains Data &bull; UNESA</span>
                         </div>
 
                         <!-- Floating Pill: Award -->
-                        <div class="absolute -bottom-4 -right-4 sm:-right-6 px-4 py-2.5 rounded-2xl glass-card-static border border-accentPurple/30 shadow-xl flex items-center gap-2.5 text-xs font-bold text-white">
+                        <div class="absolute -bottom-4 -right-4 sm:-right-6 px-4 py-2.5 rounded-2xl glass-card-static border border-accentPurple/30 shadow-xl flex items-center gap-2.5 text-xs font-bold text-[#0F172A]">
                             <div class="w-6 h-6 rounded-lg bg-accentPurple/20 flex items-center justify-center text-accentPurple">
                                 <i class="fa-solid fa-medal"></i>
                             </div>
                             <div>
                                 <div class="text-[10px] text-[#64748B] uppercase leading-none">Pemenang Perak</div>
-                                <div class="text-white text-xs">Juara 2 DIMAS TI</div>
+                                <div class="text-[#0F172A] text-xs font-bold">Juara 2 DIMAS TI</div>
                             </div>
                         </div>
                     </div>
@@ -852,24 +984,24 @@
                 <!-- Ribbon Card -->
                 <div class="ribbon-card">
                     <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">Mobile UI</span>
-                        <i class="fa-solid fa-mobile text-[#1066FF] text-base"></i>
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">NLP Pipeline</span>
+                        <i class="fa-solid fa-brain text-[#1066FF] text-base"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-[#0F172A] text-sm">BISINDO Gesture Camera</h4>
-                        <p class="text-xs text-[#475569] mt-1 leading-snug">High-contrast accessibility screen for deaf learners.</p>
+                        <h4 class="font-bold text-[#0F172A] text-sm">7-Kelas Cyberbullying</h4>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">IndoBERTweet + subword feature union untuk klasifikasi teks.</p>
                     </div>
-                    <div class="text-xs font-mono text-[#1066FF] font-bold">SUS Score: 82.3 • WCAG AAA</div>
+                    <div class="text-xs font-mono text-[#1066FF] font-bold">Macro-F1 ~0,88</div>
                 </div>
                 <!-- Ribbon Card -->
                 <div class="ribbon-card">
                     <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">Design Tokens</span>
-                        <i class="fa-solid fa-palette text-[#1066FF] text-base"></i>
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">Feature Engineering</span>
+                        <i class="fa-solid fa-diagram-project text-[#1066FF] text-base"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-[#0F172A] text-sm">STEAM-Craft Style Guide</h4>
-                        <p class="text-xs text-[#475569] mt-1 leading-snug">Color, typography, and atomic elevation tokens.</p>
+                        <h4 class="font-bold text-[#0F172A] text-sm">Subword + IndoBERTweet</h4>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">Hybrid features untuk model klasifikasi yang robust.</p>
                     </div>
                     <div class="text-xs font-mono text-[#1066FF] font-bold">Juara 2 DIMAS TI</div>
                 </div>
@@ -949,24 +1081,24 @@
                 <!-- Ribbon Card -->
                 <div class="ribbon-card">
                     <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">Mobile UI</span>
-                        <i class="fa-solid fa-mobile text-[#1066FF] text-base"></i>
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">NLP Pipeline</span>
+                        <i class="fa-solid fa-brain text-[#1066FF] text-base"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-[#0F172A] text-sm">BISINDO Gesture Camera</h4>
-                        <p class="text-xs text-[#475569] mt-1 leading-snug">High-contrast accessibility screen for deaf learners.</p>
+                        <h4 class="font-bold text-[#0F172A] text-sm">7-Kelas Cyberbullying</h4>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">IndoBERTweet + subword feature union untuk klasifikasi teks.</p>
                     </div>
-                    <div class="text-xs font-mono text-[#1066FF] font-bold">SUS Score: 82.3 • WCAG AAA</div>
+                    <div class="text-xs font-mono text-[#1066FF] font-bold">Macro-F1 ~0,88</div>
                 </div>
                 <!-- Ribbon Card -->
                 <div class="ribbon-card">
                     <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">Design Tokens</span>
-                        <i class="fa-solid fa-palette text-[#1066FF] text-base"></i>
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC]">Feature Engineering</span>
+                        <i class="fa-solid fa-diagram-project text-[#1066FF] text-base"></i>
                     </div>
                     <div>
-                        <h4 class="font-bold text-[#0F172A] text-sm">STEAM-Craft Style Guide</h4>
-                        <p class="text-xs text-[#475569] mt-1 leading-snug">Color, typography, and atomic elevation tokens.</p>
+                        <h4 class="font-bold text-[#0F172A] text-sm">Subword + IndoBERTweet</h4>
+                        <p class="text-xs text-[#475569] mt-1 leading-snug">Hybrid features untuk model klasifikasi yang robust.</p>
                     </div>
                     <div class="text-xs font-mono text-[#1066FF] font-bold">Juara 2 DIMAS TI</div>
                 </div>
@@ -1054,7 +1186,7 @@
         <div class="max-w-7xl mx-auto px-5 sm:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
                 <div>
-                    <div class="text-xs font-mono font-bold tracking-widest text-[#1066FF] uppercase mb-2 font-mono font-bold tracking-widest">// PROFIL &amp; FILOSOFI</div>
+                    <div class="text-xs font-mono font-bold tracking-widest text-[#1066FF] uppercase mb-2">// PROFIL &amp; FILOSOFI</div>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
                         Menghubungkan <span class="gradient-text-primary">Sains Data</span>, <span class="gradient-text-cyan">Rekayasa AI &amp; Sistem</span>, &amp; <span class="text-[#1066FF]">Keputusan Strategis</span>
                     </h2>
@@ -1080,7 +1212,7 @@
                             </div>
                         </div>
                         <p class="text-[#334155] leading-relaxed mb-4 text-sm sm:text-base">
-                            Saya percaya bahwa analitik data terbaik adalah yang dapat dimengerti dan dieksekusi dengan mudah oleh manusia. Dengan latar belakang pendidikan <strong class="text-white">Sains Data di UNESA (IPK 3.80)</strong>, saya terlatih dalam matematika statistik, machine learning (Supervised & Unsupervised), regresi spasial (GWR), serta pengolahan sinyal digital.
+                            Saya percaya bahwa analitik data terbaik adalah yang dapat dimengerti dan dieksekusi dengan mudah oleh manusia. Dengan latar belakang pendidikan <strong class="text-[#0F172A] font-bold">Sains Data di UNESA (IPK 3.84)</strong>, saya terlatih dalam matematika statistik, machine learning (Supervised & Unsupervised), regresi spasial (GWR), serta pengolahan sinyal digital.
                         </p>
                         <p class="text-[#334155] leading-relaxed text-sm sm:text-base">
                             Kelebihan unik saya terletak pada sintesis antara <span class="text-[#1066FF] font-semibold">rekayasa kecerdasan komputasi &amp; arsitektur sistem</span> (terbukti lewat Medali Perak DIMAS TI Nasional &amp; Finalis GEMASTIK XVIII) dan <span class="text-[#1E3A8A] font-semibold">mentalitas analitik operasional nyata</span> berkat pengalaman mengelola toko ritel Naza Cell sejak 2019 serta mendata ribuan unit usaha untuk Badan Pusat Statistik (BPS).
@@ -1091,21 +1223,21 @@
                         <div class="flex items-center gap-3">
                             <i class="fa-solid fa-brain text-accentCyan text-xl"></i>
                             <div>
-                                <div class="text-xs font-bold text-white">Machine Learning</div>
+                                <div class="text-xs font-bold text-[#0F172A]">Machine Learning</div>
                                 <div class="text-[11px] text-[#64748B]">NLP & Prediksi Akurat</div>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <i class="fa-solid fa-compass-drafting text-pink-400 text-xl"></i>
                             <div>
-                                <div class="text-xs font-bold text-white">Rekayasa Sistem Cerdas</div>
+                                <div class="text-xs font-bold text-[#0F172A]">Rekayasa Sistem Cerdas</div>
                                 <div class="text-[11px] text-[#64748B]">15+ Sistem & Proyek Riset</div>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <i class="fa-solid fa-chart-line text-accentEmerald text-xl"></i>
                             <div>
-                                <div class="text-xs font-bold text-white">Validasi Lapangan</div>
+                                <div class="text-xs font-bold text-[#0F172A]">Validasi Lapangan</div>
                                 <div class="text-[11px] text-[#64748B]">BPS & Operasional Ritel</div>
                             </div>
                         </div>
@@ -1188,7 +1320,7 @@
                         <ul class="space-y-3 text-sm text-[#334155] mt-5">
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentBlue text-xs mt-1"></i>
-                                <span>Mendata sekitar <strong class="text-white">1.050 usaha/perusahaan</strong> secara langsung di lapangan dalam kerangka program nasional Sensus Ekonomi 2026.</span>
+                                <span>Mendata sekitar <strong class="text-[#0F172A] font-bold">1.050 usaha/perusahaan</strong> secara langsung di lapangan dalam kerangka program nasional Sensus Ekonomi 2026.</span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentBlue text-xs mt-1"></i>
@@ -1230,11 +1362,11 @@
                         <ul class="space-y-3 text-sm text-[#334155] mt-5">
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentEmerald text-xs mt-1"></i>
-                                <span>Mengelola operasional harian toko ritel sembako dan layanan jasa transaksi keuangan digital (PPOB, transfer perbankan, E-Money, pulsa & token) dengan volume <strong class="text-white">50-80 transaksi per hari</strong>.</span>
+                                <span>Mengelola operasional harian toko ritel sembako dan layanan jasa transaksi keuangan digital (PPOB, transfer perbankan, E-Money, pulsa & token) dengan volume <strong class="text-[#0F172A] font-bold">50-80 transaksi per hari</strong>.</span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentEmerald text-xs mt-1"></i>
-                                <span>Melakukan manajemen inventaris untuk <strong class="text-white">100+ jenis SKU barang</strong> dan menjalin hubungan rutin dengan 3-5 distributor/supplier untuk menjaga rasio ketersediaan stok mencapai <strong class="text-accentEmerald">100%</strong>.</span>
+                                <span>Melakukan manajemen inventaris untuk <strong class="text-[#0F172A] font-bold">100+ jenis SKU barang</strong> dan menjalin hubungan rutin dengan 3-5 distributor/supplier untuk menjaga rasio ketersediaan stok mencapai <strong class="text-accentEmerald">100%</strong>.</span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentEmerald text-xs mt-1"></i>
@@ -1273,7 +1405,7 @@
                         <ul class="space-y-3 text-sm text-[#334155] mt-5">
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentPurple text-xs mt-1"></i>
-                                <span>Melakukan inisiatif transisi dari kemitraan sebelumnya ("Citul Ningrat") menjadi pemilik brand mandiri dalam 6 bulan, mengelola proses bisnis end-to-end dengan kapasitas produksi <strong class="text-white">30-50 porsi/hari</strong>.</span>
+                                <span>Melakukan inisiatif transisi dari kemitraan sebelumnya ("Citul Ningrat") menjadi pemilik brand mandiri dalam 6 bulan, mengelola proses bisnis end-to-end dengan kapasitas produksi <strong class="text-[#0F172A] font-bold">30-50 porsi/hari</strong>.</span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentPurple text-xs mt-1"></i>
@@ -1281,7 +1413,7 @@
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i class="fa-solid fa-chevron-right text-accentPurple text-xs mt-1"></i>
-                                <span>Merilis 3 varian rasa baru dan mengeksekusi strategi branding lokal yang sukses mengakuisisi <strong class="text-white">lebih dari 50 pelanggan baru</strong> pada bulan pertama peluncuran.</span>
+                                <span>Merilis 3 varian rasa baru dan mengeksekusi strategi branding lokal yang sukses mengakuisisi <strong class="text-[#0F172A] font-bold">lebih dari 50 pelanggan baru</strong> pada bulan pertama peluncuran.</span>
                             </li>
                         </ul>
                     </div>
@@ -1340,6 +1472,84 @@
     </section>
 
     
+
+    <!-- Education & Achievements -->
+    <section id="education" class="py-24 relative z-10 border-t border-[#E2E8F0] bg-[#F5F8FE]">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <div class="text-xs font-mono font-bold tracking-widest text-[#1066FF] uppercase mb-2">// PENDIDIKAN & PRESTASI</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">Fondasi Akademik & <span class="gradient-text-primary">Milestone</span></h2>
+                </div>
+                <p class="text-[#475569] text-sm max-w-md">Perjalanan akademik dan kompetisi yang mengasah kemampuan riset, rekayasa sistem, serta eksekusi solusi berbasis data.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <article class="glass-card p-6 border-t-4 border-t-[#1066FF]">
+                    <div class="w-11 h-11 rounded-xl bg-[#E0EEFE] text-[#1066FF] flex items-center justify-center text-lg mb-5"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="text-xs font-mono text-[#1066FF] font-bold uppercase">2022 — Sekarang</div>
+                    <h3 class="text-lg font-bold mt-2">S1 Sains Data</h3>
+                    <p class="text-sm mt-2">Universitas Negeri Surabaya (UNESA)</p>
+                    <div class="mt-5 pt-4 border-t border-[#E2E8F0] text-sm font-bold text-[#0F172A]">IPK 3.84 / 4.00</div>
+                </article>
+                <article class="glass-card p-6 border-t-4 border-t-amber-500">
+                    <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg mb-5"><i class="fa-solid fa-medal"></i></div>
+                    <div class="text-xs font-mono text-amber-600 font-bold uppercase">2024</div>
+                    <h3 class="text-lg font-bold mt-2">Medali Perak DIMAS TI</h3>
+                    <p class="text-sm mt-2">Juara 2 Nasional pada kompetisi inovasi teknologi.</p>
+                    <div class="mt-5 pt-4 border-t border-[#E2E8F0] text-xs font-mono text-[#64748B]">This Me · BISINDO</div>
+                </article>
+                <article class="glass-card p-6 border-t-4 border-t-indigo-500">
+                    <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg mb-5"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="text-xs font-mono text-indigo-600 font-bold uppercase">GEMASTIK XVIII</div>
+                    <h3 class="text-lg font-bold mt-2">Finalis Perangkat Lunak</h3>
+                    <p class="text-sm mt-2">Lolos mewakili UNESA pada ajang nasional Puspresnas.</p>
+                    <div class="mt-5 pt-4 border-t border-[#E2E8F0] text-xs font-mono text-[#64748B]">Software Engineering</div>
+                </article>
+                <article class="glass-card p-6 border-t-4 border-t-emerald-500">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg mb-5"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="text-xs font-mono text-emerald-600 font-bold uppercase">2026</div>
+                    <h3 class="text-lg font-bold mt-2">Kartika Cyber</h3>
+                    <p class="text-sm mt-2">Eksplorasi Adaptive IT/OT Deception Grid untuk pertahanan siber.</p>
+                    <div class="mt-5 pt-4 border-t border-[#E2E8F0] text-xs font-mono text-[#64748B]">WAYANG · 55 tests passing</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Project Consultant -->
+    <section id="ai-consultant" class="py-24 relative z-10 border-t border-[#E2E8F0] bg-white">
+        <div class="max-w-5xl mx-auto px-5 sm:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E0EEFE] text-[#1066FF] border border-[#BADDFC] text-xs font-bold font-mono uppercase tracking-widest"><i class="fa-solid fa-sparkles"></i> AI LAB</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4">Rancang Solusi <span class="gradient-text-primary">Berbasis Data</span></h2>
+                <p class="text-[#475569] text-sm mt-3">Masukkan ide proyekmu. Engine ini menyusun blueprint awal untuk data, model, arsitektur sistem, dan metrik bisnis.</p>
+            </div>
+            <div class="glass-card p-5 sm:p-7">
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button onclick="setPrompt('Rancang sistem pertahanan siber WAYANG dengan deception grid untuk lingkungan IT/OT.');" class="px-3 py-1.5 rounded-full bg-[#F5F8FE] border border-[#CBD5E1] text-xs font-semibold text-[#334155] hover:border-[#1066FF] hover:text-[#1066FF]">WAYANG / Cyber</button>
+                    <button onclick="setPrompt('Buat sistem prediksi stok dan rekomendasi restock untuk toko ritel dengan 100+ SKU.');" class="px-3 py-1.5 rounded-full bg-[#F5F8FE] border border-[#CBD5E1] text-xs font-semibold text-[#334155] hover:border-[#1066FF] hover:text-[#1066FF]">Ritel / Stok</button>
+                    <button onclick="setPrompt('Buat dashboard GIS untuk pemetaan risiko DBD berbasis analisis spasial.');" class="px-3 py-1.5 rounded-full bg-[#F5F8FE] border border-[#CBD5E1] text-xs font-semibold text-[#334155] hover:border-[#1066FF] hover:text-[#1066FF]">Spasial / GIS</button>
+                    <button onclick="setPrompt('Rancang aplikasi pembelajaran dan pengenalan gestur BISINDO yang inklusif.');" class="px-3 py-1.5 rounded-full bg-[#F5F8FE] border border-[#CBD5E1] text-xs font-semibold text-[#334155] hover:border-[#1066FF] hover:text-[#1066FF]">BISINDO</button>
+                    <button onclick="setPrompt('Bangun sistem deteksi kerusakan mesin dari sinyal audio menggunakan DSP.');" class="px-3 py-1.5 rounded-full bg-[#F5F8FE] border border-[#CBD5E1] text-xs font-semibold text-[#334155] hover:border-[#1066FF] hover:text-[#1066FF]">Audio / DSP</button>
+                    <button onclick="setPrompt('Rancang moderasi cyberbullying berbasis NLP untuk komentar media sosial.');" class="px-3 py-1.5 rounded-full bg-[#F5F8FE] border border-[#CBD5E1] text-xs font-semibold text-[#334155] hover:border-[#1066FF] hover:text-[#1066FF]">Cyberbullying / NLP</button>
+                </div>
+                <textarea id="ai-prompt-input" rows="4" class="w-full rounded-2xl border border-[#CBD5E1] bg-[#F8FAFE] px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:border-[#1066FF] focus:ring-2 focus:ring-[#BADDFC] outline-none" placeholder="Contoh: saya ingin membuat sistem analitik untuk..."></textarea>
+                <div class="mt-4 flex flex-col sm:flex-row gap-3">
+                    <button id="ai-generate-btn" onclick="generateSolution()" class="flex-1 px-5 py-3 rounded-xl bg-[#1066FF] hover:bg-[#0A5AF0] text-white font-bold text-sm shadow-md transition-all"><i class="fa-solid fa-sparkles"></i> <span>Rancang Arsitektur Solusi</span></button>
+                    <button onclick="toggleApiKeyInput()" class="px-5 py-3 rounded-xl border border-[#CBD5E1] bg-[#F5F8FE] text-[#334155] font-semibold text-sm hover:border-[#1066FF] hover:text-[#1066FF]"><i class="fa-solid fa-key"></i> API Key Opsional</button>
+                </div>
+                <div id="api-key-container" class="hidden mt-4 p-4 rounded-xl bg-[#F5F8FE] border border-[#E2E8F0]">
+                    <label for="custom-api-key" class="text-xs font-semibold text-[#475569]">Gemini API Key (disimpan lokal di browser)</label>
+                    <div class="flex gap-2 mt-2"><input id="custom-api-key" type="password" class="flex-1 rounded-lg border border-[#CBD5E1] px-3 py-2 text-sm" placeholder="AIza..." /><button onclick="saveApiKey()" class="px-4 py-2 rounded-lg bg-[#E0EEFE] text-[#1066FF] text-sm font-bold">Simpan</button></div>
+                </div>
+                <div id="ai-output-container" class="hidden mt-6 pt-6 border-t border-[#E2E8F0]">
+                    <div id="ai-output-content"></div>
+                    <div class="mt-5 flex flex-wrap gap-3"><button id="send-wa-btn" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold"><i class="fa-brands fa-whatsapp"></i> Diskusikan via WhatsApp</button><button onclick="copySolutionToClipboard()" class="px-4 py-2.5 rounded-xl bg-[#F5F8FE] border border-[#CBD5E1] text-[#334155] text-xs font-semibold"><i class="fa-regular fa-copy"></i> Salin Ringkasan</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Tech Stack & Stats Showcase (Exact design from user reference) -->
     <section id="tech-stack" class="py-24 relative z-10 border-t border-[#E2E8F0] bg-[#F5F8FE] overflow-hidden">
         <!-- Ambient orbs matching screenshot -->
@@ -1401,49 +1611,49 @@
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-go-original-wordmark colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Golang</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Golang</span>
                 </div>
                 <!-- 2. PHP -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-php-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">PHP</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">PHP</span>
                 </div>
                 <!-- 3. React JS -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-react-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">React JS</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">React JS</span>
                 </div>
                 <!-- 4. Nest JS -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-nestjs-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Nest JS</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Nest JS</span>
                 </div>
                 <!-- 5. Next JS -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
-                        <i class="devicon-nextjs-plain text-3xl sm:text-4xl text-white group-hover:scale-110 transition-transform"></i>
+                        <i class="devicon-nextjs-plain text-3xl sm:text-4xl colored group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Next JS</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Next JS</span>
                 </div>
                 <!-- 6. Laravel -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-laravel-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Laravel</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Laravel</span>
                 </div>
                 <!-- 7. Python -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-python-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Python</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Python</span>
                 </div>
 
                 <!-- Row 2 -->
@@ -1452,49 +1662,49 @@
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-django-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Django</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Django</span>
                 </div>
                 <!-- 9. Wordpress -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-wordpress-plain text-3xl sm:text-4xl text-[#334155] group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Wordpress</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Wordpress</span>
                 </div>
                 <!-- 10. MySQL -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-mysql-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">MySQL</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">MySQL</span>
                 </div>
                 <!-- 11. PostgreSQL -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-postgresql-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">PostgreSQL</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">PostgreSQL</span>
                 </div>
                 <!-- 12. MongoDB -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-mongodb-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">MongoDB</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">MongoDB</span>
                 </div>
                 <!-- 13. Docker -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-docker-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Docker</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Docker</span>
                 </div>
                 <!-- 14. Git -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-git-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Git</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Git</span>
                 </div>
             </div>
 
@@ -1505,49 +1715,49 @@
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-python-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Python</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Python</span>
                 </div>
                 <!-- 2. PyTorch -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-pytorch-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">PyTorch</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">PyTorch</span>
                 </div>
                 <!-- 3. FastAPI -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-fastapi-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">FastAPI</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">FastAPI</span>
                 </div>
                 <!-- 4. TypeScript -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-typescript-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">TypeScript</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">TypeScript</span>
                 </div>
                 <!-- 5. React 19 -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-react-original colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">React 19</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">React 19</span>
                 </div>
                 <!-- 6. Tailwind CSS -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-tailwindcss-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Tailwind CSS</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Tailwind CSS</span>
                 </div>
                 <!-- 7. Docker -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-docker-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Docker</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Docker</span>
                 </div>
 
                 <!-- Row 2 -->
@@ -1556,49 +1766,49 @@
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-postgresql-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">PostgreSQL</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">PostgreSQL</span>
                 </div>
                 <!-- 9. Three.js -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
-                        <i class="devicon-threejs-original text-3xl sm:text-4xl text-white group-hover:scale-110 transition-transform"></i>
+                        <i class="devicon-threejs-original text-3xl sm:text-4xl colored group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Three.js</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Three.js</span>
                 </div>
                 <!-- 10. R / GWR -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-r-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">R / GWR</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">R / GWR</span>
                 </div>
                 <!-- 11. Scikit-Learn -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="fa-solid fa-brain text-amber-400 text-3xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Scikit-Learn</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Scikit-Learn</span>
                 </div>
                 <!-- 12. Modbus & OT -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="fa-solid fa-shield-halved text-cyan-400 text-3xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Modbus / ICS</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Modbus / ICS</span>
                 </div>
                 <!-- 13. Next JS -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
-                        <i class="devicon-nextjs-plain text-3xl sm:text-4xl text-white group-hover:scale-110 transition-transform"></i>
+                        <i class="devicon-nextjs-plain text-3xl sm:text-4xl colored group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Next JS</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Next JS</span>
                 </div>
                 <!-- 14. Git & CI/CD -->
                 <div class="bg-white hover:bg-white border border-[#E2E8F0] hover:border-[#1066FF] rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2.5 transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-md shadow-sm group cursor-pointer">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <i class="devicon-git-plain colored text-3xl sm:text-4xl group-hover:scale-110 transition-transform"></i>
                     </div>
-                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] font-semibold transition-colors">Git & CI/CD</span>
+                    <span class="text-xs sm:text-sm font-semibold text-[#0F172A] group-hover:text-[#1066FF] transition-colors">Git & CI/CD</span>
                 </div>
             </div>
 
@@ -1802,7 +2012,7 @@
                             <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">GitHub Actions CI/CD</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mb-2">
-                            <a href="https://app.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-accentCyan/30 to-accentBlue/30 hover:from-accentCyan/50 hover:to-accentBlue/50 border border-accentCyan/40 text-cyan-200 hover:text-white text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                            <a href="https://app.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-accentCyan/30 to-accentBlue/30 hover:from-accentCyan/50 hover:to-accentBlue/50 border border-accentCyan/40 text-cyan-200 hover:text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-rocket text-[11px]"></i>
                                 <span>Buka Web App</span>
                             </a>
@@ -1893,7 +2103,7 @@
                             <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Monte Carlo</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mb-2">
-                            <a href="https://verilab.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-accentEmerald/30 to-teal-500/30 hover:from-accentEmerald/50 hover:to-teal-500/50 border border-accentEmerald/40 text-emerald-200 hover:text-white text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                            <a href="https://verilab.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-accentEmerald/30 to-teal-500/30 hover:from-accentEmerald/50 hover:to-teal-500/50 border border-accentEmerald/40 text-emerald-200 hover:text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-microscope text-[11px]"></i>
                                 <span>Buka VeriLab AI</span>
                             </a>
@@ -1977,7 +2187,7 @@
                             <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Vite</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mb-2">
-                            <a href="https://scholar.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-indigo-600/30 to-purple-600/30 hover:from-indigo-600/50 hover:to-purple-600/50 border border-indigo-500/40 text-indigo-200 hover:text-white text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                            <a href="https://scholar.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-indigo-600/30 to-purple-600/30 hover:from-indigo-600/50 hover:to-purple-600/50 border border-indigo-500/40 text-indigo-200 hover:text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-file-lines text-[11px]"></i>
                                 <span>Buka Platform</span>
                             </a>
@@ -2059,7 +2269,7 @@
                             <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Vite</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mb-2">
-                            <a href="https://sim.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-600/30 to-teal-600/30 hover:from-cyan-600/50 hover:to-teal-600/50 border border-cyan-500/40 text-cyan-200 hover:text-white text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                            <a href="https://sim.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-600/30 to-teal-600/30 hover:from-cyan-600/50 hover:to-teal-600/50 border border-cyan-500/40 text-cyan-200 hover:text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-gamepad text-[11px]"></i>
                                 <span>Buka Studio</span>
                             </a>
@@ -2138,7 +2348,7 @@
                             <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">3D Printing</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mb-2">
-                            <a href="https://maker.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-pink-600/30 to-rose-600/30 hover:from-pink-600/50 hover:to-rose-600/50 border border-pink-500/40 text-pink-200 hover:text-white text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                            <a href="https://maker.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-pink-600/30 to-rose-600/30 hover:from-pink-600/50 hover:to-rose-600/50 border border-pink-500/40 text-pink-200 hover:text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-globe text-[11px]"></i>
                                 <span>Buka Studio</span>
                             </a>
@@ -2294,7 +2504,7 @@
                             <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Vite</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mb-2">
-                            <a href="https://arena.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-amber-600/30 to-orange-600/30 hover:from-amber-600/50 hover:to-orange-600/50 border border-amber-500/40 text-amber-200 hover:text-white text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                            <a href="https://arena.steamcraft.online" target="_blank" class="py-2 px-3 rounded-xl bg-gradient-to-r from-amber-600/30 to-orange-600/30 hover:from-amber-600/50 hover:to-orange-600/50 border border-amber-500/40 text-amber-200 hover:text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
                                 <i class="fa-solid fa-globe text-[11px]"></i>
                                 <span>Buka Arena</span>
                             </a>
@@ -2818,8 +3028,8 @@
                                     <span class="text-[#0F172A]">IndoBERTweet & Hybrid Stacking (NLP)</span>
                                     <span class="text-accentCyan font-mono">Akurasi &gt;88%</span>
                                 </div>
-                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full" style="width: 95%"></div>
+                                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full skill-bar" style="width: 95%"></div>
                                 </div>
                             </div>
                             <div>
@@ -2827,8 +3037,8 @@
                                     <span class="text-[#0F172A]">Linear SVM & Subword Feature Engineering</span>
                                     <span class="text-accentBlue font-mono">16k Fitur &bull; LDA</span>
                                 </div>
-                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full" style="width: 90%"></div>
+                                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-bar" style="width: 90%"></div>
                                 </div>
                             </div>
                             <div>
@@ -2836,8 +3046,8 @@
                                     <span class="text-[#0F172A]">Decision Tree, KNN & XGBoost</span>
                                     <span class="text-accentBlue font-mono">Klasifikasi</span>
                                 </div>
-                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full" style="width: 82%"></div>
+                                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-bar" style="width: 82%"></div>
                                 </div>
                             </div>
                         </div>
@@ -2874,8 +3084,8 @@
                                     <span class="text-[#0F172A]">GWR (Geographically Weighted Reg.)</span>
                                     <span class="text-accentPurple font-mono">R Spatial</span>
                                 </div>
-                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" style="width: 88%"></div>
+                                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full skill-bar" style="width: 88%"></div>
                                 </div>
                             </div>
                             <div>
@@ -2883,8 +3093,8 @@
                                     <span class="text-[#0F172A]">DSP Filter IIR & FIR</span>
                                     <span class="text-accentPurple font-mono">Audio FFT</span>
                                 </div>
-                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" style="width: 82%"></div>
+                                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full skill-bar" style="width: 82%"></div>
                                 </div>
                             </div>
                             <div>
@@ -2892,8 +3102,8 @@
                                     <span class="text-[#0F172A]">Ekstraksi Data (PDF, Scraping, Regex)</span>
                                     <span class="text-accentPurple font-mono">Automation</span>
                                 </div>
-                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" style="width: 90%"></div>
+                                <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full skill-bar" style="width: 90%"></div>
                                 </div>
                             </div>
                         </div>
@@ -2927,7 +3137,7 @@
                                     <span class="text-[#1066FF] font-mono">Enterprise SQL</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-[#1066FF] to-blue-400 rounded-full" style="width: 95%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1066FF] to-blue-400 rounded-full skill-bar" style="width: 95%"></div>
                                 </div>
                             </div>
                             <div>
@@ -2936,7 +3146,7 @@
                                     <span class="text-[#1066FF] font-mono">Cloud &amp; Async</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full" style="width: 90%"></div>
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-bar" style="width: 90%"></div>
                                 </div>
                             </div>
                             <div>
@@ -2945,7 +3155,7 @@
                                     <span class="text-[#1066FF] font-mono">Cyber Grid</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full" style="width: 86%"></div>
+                                    <div class="h-full bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full skill-bar" style="width: 86%"></div>
                                 </div>
                             </div>
                         </div>
@@ -2980,7 +3190,7 @@
             </h2>
 
             <p class="text-[#334155] text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed">
-                Apakah Anda sedang mencari kandidat <strong class="text-white">Data Scientist / Analyst</strong> yang adaptif, praktisi <strong class="text-[#1066FF] font-bold">Data Science &amp; Machine Learning</strong> berprestasi nasional, atau rekan untuk proyek inovatif? Pintu komunikasi saya selalu terbuka!
+                Apakah Anda sedang mencari kandidat <strong class="text-[#0F172A]">Data Scientist / Analyst</strong> yang adaptif, praktisi <strong class="text-[#1066FF] font-bold">Data Science &amp; Machine Learning</strong> berprestasi nasional, atau rekan untuk proyek inovatif? Pintu komunikasi saya selalu terbuka!
             </p>
 
             <!-- Contact Cards Grid -->
@@ -2992,11 +3202,11 @@
                             <i class="fa-solid fa-envelope"></i>
                         </div>
                         <div class="text-xs text-[#64748B] font-mono">Email Resmi</div>
-                        <div class="text-sm font-bold text-white mt-1 break-all">firmannaza307@gmail.com</div>
+                        <div class="text-sm font-bold text-[#0F172A] mt-1 break-all">firmannaza307@gmail.com</div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-[#E2E8F0] flex items-center justify-between">
                         <a href="mailto:firmannaza307@gmail.com" class="text-xs font-semibold text-accentBlue hover:underline">Kirim Email &rarr;</a>
-                        <button onclick="copyToClipboard('firmannaza307@gmail.com', 'Email berhasil disalin!')" class="text-[#64748B] hover:text-white text-xs" title="Salin">
+                        <button onclick="copyToClipboard('firmannaza307@gmail.com', 'Email berhasil disalin!')" class="text-[#64748B] hover:text-[#1066FF] text-xs" title="Salin">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
@@ -3009,11 +3219,11 @@
                             <i class="fa-brands fa-whatsapp"></i>
                         </div>
                         <div class="text-xs text-[#64748B] font-mono">WhatsApp / Telepon</div>
-                        <div class="text-sm font-bold text-white mt-1">+62 852 3601 9625</div>
+                        <div class="text-sm font-bold text-[#0F172A] mt-1">+62 852 3601 9625</div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-[#E2E8F0] flex items-center justify-between">
                         <a href="https://wa.me/6285236019625?text=Halo%20Naza,%20saya%20tertarik%20berkolaborasi%20mengenai..." target="_blank" class="text-xs font-semibold text-accentEmerald hover:underline">Kirim Chat &rarr;</a>
-                        <button onclick="copyToClipboard('+6285236019625', 'Nomor WhatsApp berhasil disalin!')" class="text-[#64748B] hover:text-white text-xs" title="Salin">
+                        <button onclick="copyToClipboard('+6285236019625', 'Nomor WhatsApp berhasil disalin!')" class="text-[#64748B] hover:text-[#1066FF] text-xs" title="Salin">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
@@ -3026,11 +3236,11 @@
                             <i class="fa-brands fa-linkedin-in"></i>
                         </div>
                         <div class="text-xs text-[#64748B] font-mono">Koneksi Profesional</div>
-                        <div class="text-sm font-bold text-white mt-1">linkedin.com/in/nazafirman</div>
+                        <div class="text-sm font-bold text-[#0F172A] mt-1">linkedin.com/in/nazafirman</div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-[#E2E8F0] flex items-center justify-between">
                         <a href="https://www.linkedin.com/in/nazafirman" target="_blank" class="text-xs font-semibold text-indigo-400 hover:underline">Kunjungi Profil &rarr;</a>
-                        <button onclick="copyToClipboard('https://www.linkedin.com/in/nazafirman', 'Tautan LinkedIn berhasil disalin!')" class="text-[#64748B] hover:text-white text-xs" title="Salin">
+                        <button onclick="copyToClipboard('https://www.linkedin.com/in/nazafirman', 'Tautan LinkedIn berhasil disalin!')" class="text-[#64748B] hover:text-[#1066FF] text-xs" title="Salin">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
@@ -3043,7 +3253,7 @@
                     <i class="fa-solid fa-file-arrow-down text-base text-red-600"></i>
                     <span>Unduh CV Resmi Lengkap (PDF)</span>
                 </a>
-                <a href="https://portofolionaza.steamcraft.online" target="_blank" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-[#E2E8F0] text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                <a href="https://portofolionaza.steamcraft.online" target="_blank" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#E2E8F0] text-[#0F172A] font-semibold text-sm transition-all flex items-center justify-center gap-2">
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                     <span>portofolionaza.steamcraft.online</span>
                 </a>
@@ -3051,21 +3261,28 @@
 
             <!-- Social Links Row -->
             <div class="mt-14 pt-8 border-t border-[#E2E8F0] flex justify-center gap-4">
-                <a href="https://github.com/nazaa-arch" target="_blank" class="w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-[#E2E8F0] flex items-center justify-center text-[#475569] hover:text-[#1066FF] transition-all font-semibold" title="GitHub Profile">
+                <a href="https://github.com/nazaa-arch" target="_blank" class="w-11 h-11 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#E2E8F0] flex items-center justify-center text-[#475569] hover:text-[#1066FF] transition-all font-semibold" title="GitHub Profile">
                     <i class="fa-brands fa-github text-lg"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/nazafirman" target="_blank" class="w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-[#E2E8F0] flex items-center justify-center text-[#334155] hover:text-accentBlue transition-all" title="LinkedIn Profile">
+                <a href="https://www.linkedin.com/in/nazafirman" target="_blank" class="w-11 h-11 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#E2E8F0] flex items-center justify-center text-[#334155] hover:text-accentBlue transition-all" title="LinkedIn Profile">
                     <i class="fa-brands fa-linkedin text-lg"></i>
                 </a>
-                <a href="mailto:firmannaza307@gmail.com" class="w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-[#E2E8F0] flex items-center justify-center text-[#334155] hover:text-accentCyan transition-all" title="Email Naza">
+                <a href="mailto:firmannaza307@gmail.com" class="w-11 h-11 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#E2E8F0] flex items-center justify-center text-[#334155] hover:text-accentCyan transition-all" title="Email Naza">
                     <i class="fa-solid fa-envelope text-lg"></i>
                 </a>
-                <a href="https://wa.me/6285236019625" target="_blank" class="w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-[#E2E8F0] flex items-center justify-center text-[#334155] hover:text-accentEmerald transition-all" title="WhatsApp Direct">
+                <a href="https://wa.me/6285236019625" target="_blank" class="w-11 h-11 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#E2E8F0] flex items-center justify-center text-[#334155] hover:text-accentEmerald transition-all" title="WhatsApp Direct">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
                 </a>
             </div>
         </div>
     </section>
+
+    </main>
+
+    <button id="back-to-top" aria-label="Kembali ke atas" title="Kembali ke atas"
+        class="fixed bottom-5 left-5 sm:bottom-6 sm:left-6 z-40 w-11 h-11 rounded-full bg-[#1066FF] hover:bg-[#0A5AF0] text-white shadow-lg shadow-[#1066FF]/30 flex items-center justify-center transition-all duration-300">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
 
     <!-- Footer -->
     <footer class="py-8 border-t border-[#E2E8F0] bg-darkBg text-center text-xs text-gray-500">
@@ -3318,7 +3535,7 @@
 <div>
                     <div class="text-xs font-mono text-[#64748B] mb-2">Teknologi & Keterampilan Terkait:</div>
                     <div class="flex flex-wrap gap-2">
-                        ${data.tools.map(tool => `<span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/10 text-[#0F172A]">${tool}</span>`).join('')}
+                        ${data.tools.map(tool => `<span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-[#F5F8FE] text-[#0F172A]">${tool}</span>`).join('')}
                     </div>
                 </div>
 
@@ -3508,7 +3725,7 @@
         // Live Gemini API Caller (if key exists)
         async function callGeminiApi(prompt, key) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
-            const sysPrompt = "Kamu adalah Konsultan Arsitektur Proyek AI dari Muhammad Naza Firmansyah. Naza adalah mahasiswa Sains Data UNESA (IPK 3.80) dengan keahlian Python, Machine Learning (Decision Tree, Logistic Regression, Naive Bayes, XGBoost), Analisis Spasial (GWR), Digital Signal Processing (IIR/FIR), ekstraksi data, dan rekayasa perangkat lunak sistem (Juara 2 DIMAS TI). Buat analisis terstruktur 3 pilar: 1. Pendekatan Data & Pemodelan AI, 2. Arsitektur Perangkat Lunak & Integrasi Sistem (FastAPI, Go & SQL), 3. Rencana Eksekusi & Metrik Bisnis. Gunakan bahasa Indonesia yang profesional dan ramah.";
+            const sysPrompt = "Kamu adalah Konsultan Arsitektur Proyek AI dari Muhammad Naza Firmansyah. Naza adalah mahasiswa Sains Data UNESA (IPK 3.84) dengan keahlian Python, Machine Learning (Decision Tree, Logistic Regression, Naive Bayes, XGBoost), Analisis Spasial (GWR), Digital Signal Processing (IIR/FIR), ekstraksi data, dan rekayasa perangkat lunak sistem (Juara 2 DIMAS TI). Buat analisis terstruktur 3 pilar: 1. Pendekatan Data & Pemodelan AI, 2. Arsitektur Perangkat Lunak & Integrasi Sistem (FastAPI, Go & SQL), 3. Rencana Eksekusi & Metrik Bisnis. Gunakan bahasa Indonesia yang profesional dan ramah.";
             
             const response = await fetch(url, {
                 method: 'POST',
@@ -3612,40 +3829,130 @@
     // ARIQ ARVY STUDIO ANIMATIONS & INTERACTIVE SCRIPTS
     // ==========================================
 
-    // 2. Ariq Arvy Card-Dealing Intro Animation on Load
+    // Progressive section reveals: content stays visible if JS or observer is unavailable.
+    function initScrollReveals() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!('IntersectionObserver' in window)) return;
+        const targets = Array.from(document.querySelectorAll('main section > div.max-w-7xl, main section > div.max-w-4xl'));
+        if (!targets.length) return;
+
+        targets.forEach((el, i) => {
+            el.classList.add('reveal-on-scroll');
+            el.style.setProperty('--reveal-delay', `${(i % 3) * 60}ms`);
+        });
+        document.documentElement.classList.add('motion-ready');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        targets.forEach((el) => observer.observe(el));
+
+        // Geometry fallback: fast scrolls, anchor jumps and smooth scrolling can skip
+        // past a section before IntersectionObserver samples it, which would leave
+        // content stuck at opacity 0. Force-reveal anything at or above the fold.
+        let sweepQueued = false;
+        function sweep() {
+            sweepQueued = false;
+            const limit = window.innerHeight * 0.94;
+            targets.forEach((el) => {
+                if (el.classList.contains('is-visible')) return;
+                if (el.getBoundingClientRect().top < limit) {
+                    el.classList.add('is-visible');
+                    observer.unobserve(el);
+                }
+            });
+        }
+        function queueSweep() {
+            if (sweepQueued) return;
+            sweepQueued = true;
+            window.requestAnimationFrame(sweep);
+        }
+
+        window.addEventListener('scroll', queueSweep, { passive: true });
+        window.addEventListener('resize', queueSweep, { passive: true });
+        window.addEventListener('load', () => {
+            sweep();
+            window.setTimeout(sweep, 260);
+        });
+        queueSweep();
+    }
+
+    // Scroll progress + active section indicator
+    function initScrollProgress() {
+        const bar = document.getElementById('scroll-progress-bar');
+        const links = Array.from(document.querySelectorAll('#nav-links a[href^="#"]'));
+        const sections = links
+            .map((a) => document.querySelector(a.getAttribute('href')))
+            .filter(Boolean);
+        let ticking = false;
+
+        function update() {
+            ticking = false;
+            const doc = document.documentElement;
+            const max = doc.scrollHeight - window.innerHeight;
+            const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+            if (bar) bar.style.transform = `scaleX(${pct})`;
+
+            let current = null;
+            const probe = window.scrollY + window.innerHeight * 0.32;
+            sections.forEach((sec) => {
+                if (sec.offsetTop <= probe) current = sec.id;
+            });
+            links.forEach((a) => {
+                a.classList.toggle('is-active', a.getAttribute('href') === `#${current}`);
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(update);
+            }
+        }, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
+        update();
+    }
+
+    // Back-to-top control
+    function initBackToTop() {
+        const btn = document.getElementById('back-to-top');
+        if (!btn) return;
+        function onScroll() {
+            btn.classList.toggle('is-shown', window.scrollY > 620);
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        });
+        onScroll();
+    }
+
+    // Hero stats deal in one by one, left to right, like cards off a deck.
     function runCardDealingIntro() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const hero = document.getElementById('home');
         if (!hero) return;
-        const tiles = Array.from(hero.querySelectorAll('.hero-tile'));
-        if (tiles.length === 0) return;
 
-        const hr = hero.getBoundingClientRect();
-        const cx = hr.width / 2;
-        const cy = hr.height / 2;
+        const cards = Array.from(hero.querySelectorAll('.hero-stat'));
+        if (!cards.length || typeof cards[0].animate !== 'function') return;
 
-        const DEAL = 100, APPEAR = 500, HOLD = 250, SPREAD = 900;
-        const spreadAt = (tiles.length - 1) * DEAL + APPEAR + HOLD;
-        const rot = [-9, 6, -5, 8];
-
-        tiles.forEach((el, i) => {
-            const r = el.getBoundingClientRect();
-            const curCenterX = (r.left - hr.left) + r.width / 2;
-            const curCenterY = (r.top - hr.top) + r.height / 2;
-            const dx = cx - curCenterX;
-            const dy = cy - curCenterY;
-            const rDeg = rot[i % rot.length];
-
-            const start = i * DEAL;
-            const dur = spreadAt + SPREAD - start;
-            const stacked = `translate(${dx}px, ${dy}px) rotate(${rDeg}deg) scale(1.15)`;
-
+        cards.forEach((el, i) => {
             el.animate([
-                { offset: 0, opacity: 0, transform: `translate(${dx}px, ${dy + 40}px) rotate(${rDeg * 1.5}deg) scale(0.85)`, easing: 'cubic-bezier(.2,.7,.2,1)' },
-                { offset: APPEAR / dur, opacity: 1, transform: stacked },
-                { offset: (spreadAt - start) / dur, opacity: 1, transform: stacked, easing: 'cubic-bezier(.7,0,.15,1)' },
-                { offset: 1, opacity: 1, transform: 'translate(0, 0) rotate(0deg) scale(1)' }
-            ], { duration: dur, delay: start, fill: 'both' });
+                { opacity: 0, transform: 'translateY(26px) rotate(-1.6deg) scale(.94)' },
+                { opacity: 1, transform: 'translateY(-3px) rotate(0deg) scale(1)', offset: .72 },
+                { opacity: 1, transform: 'translateY(0) rotate(0deg) scale(1)' }
+            ], {
+                duration: 680,
+                delay: 180 + i * 85,
+                easing: 'cubic-bezier(.2,.75,.25,1)',
+                fill: 'both'
+            });
         });
     }
 
@@ -3664,14 +3971,23 @@
         const tabAi = document.getElementById('tech-tab-ai');
         if (!webGrid || !aiGrid || !tabWeb || !tabAi) return;
 
+        function animateIn(el) {
+            if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            el.classList.remove('tech-grid-in');
+            void el.offsetWidth; // restart the animation
+            el.classList.add('tech-grid-in');
+        }
+
         if (cat === 'web') {
             webGrid.classList.remove('hidden');
             aiGrid.classList.add('hidden');
+            animateIn(webGrid);
             tabWeb.className = 'tech-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#1066FF] shadow-sm transition-all';
             tabAi.className = 'tech-tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-[#64748B] hover:text-[#1066FF] transition-all';
         } else {
             webGrid.classList.add('hidden');
             aiGrid.classList.remove('hidden');
+            animateIn(aiGrid);
             tabAi.className = 'tech-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#1066FF] shadow-sm transition-all';
             tabWeb.className = 'tech-tab-btn px-4 py-2 rounded-xl text-xs font-semibold text-[#64748B] hover:text-[#1066FF] transition-all';
         }
@@ -3711,9 +4027,12 @@
 
     // Run animations on DOMContentLoaded
     window.addEventListener('DOMContentLoaded', () => {
-        setTimeout(runCardDealingIntro, 300);
+        setTimeout(runCardDealingIntro, 260);
         initRibbonMarquee();
         initPillNav();
+        initScrollReveals();
+        initScrollProgress();
+        initBackToTop();
     });
 
 </script>
