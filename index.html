@@ -299,16 +299,7 @@
             border-color: rgba(16, 102, 255, .34) !important;
             box-shadow: 0 18px 42px -18px rgba(16, 102, 255, .3), 0 4px 12px rgba(15, 23, 42, .05) !important;
         }
-        .motion-ready .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(22px);
-            transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
-            transition-delay: var(--reveal-delay, 0ms);
-        }
-        .motion-ready .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* reveal-on-scroll handled in ANIMATION_CSS v2 */
         .hero-lines i { animation: lineBreath 8s ease-in-out infinite alternate; }
         .hero-lines i:nth-child(2) { animation-delay: -3s; }
         .hero-lines i:nth-child(3) { animation-delay: -5s; }
@@ -377,14 +368,7 @@
             box-shadow: 0 18px 40px -18px rgba(16, 102, 255, .32) !important;
         }
 
-        /* Animated skill meters: fills grow once the section reveals. */
-        .skill-bar {
-            transform-origin: 0 50%;
-            transition: transform 1s cubic-bezier(.2,.75,.25,1) .12s;
-        }
-        .motion-ready .reveal-on-scroll:not(.is-visible) .skill-bar {
-            transform: scaleX(0);
-        }
+        /* Animated skill meters handled in ANIMATION_CSS v2 */
         /* Tech grid category switch */
         .tech-grid-in { animation: techGridIn .42s cubic-bezier(.2,.75,.25,1) both; }
         @keyframes techGridIn {
@@ -416,6 +400,237 @@
             .skill-bar { transform: none !important; transition: none !important; }
             .tech-grid-in { animation: none !important; }
             .project-item:hover .h-44 > div:first-child { transform: none !important; }
+        }
+
+
+        /* ══════════════════════════════════════════════════
+           ENHANCED ANIMATION SYSTEM v2 — PATCH 7
+           ══════════════════════════════════════════════════ */
+
+        /* 2a. Staggered reveal with blur — deeper section entry */
+        .motion-ready .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            filter: blur(4px);
+            transition:
+                opacity .72s cubic-bezier(.2,.75,.25,1),
+                transform .72s cubic-bezier(.2,.75,.25,1),
+                filter .55s ease;
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        .motion-ready .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* 2b. Shimmer sweep on project banner */
+        .project-banner-sheen {
+            position: relative;
+            overflow: hidden;
+        }
+        .project-banner-sheen::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg,
+                transparent 35%,
+                rgba(255,255,255,.18) 50%,
+                transparent 65%);
+            transform: translateX(-120%);
+            transition: transform .7s cubic-bezier(.2,.75,.25,1);
+            pointer-events: none;
+        }
+        .project-item:hover .project-banner-sheen::after {
+            transform: translateX(120%);
+        }
+
+        /* 2c. Cursor-following glow on glass cards */
+        .glass-card {
+            --gx: 50%;
+            --gy: 50%;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: radial-gradient(300px circle at var(--gx) var(--gy),
+                rgba(16,102,255,.12), transparent 70%);
+            opacity: 0;
+            transition: opacity .4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-card:hover::before { opacity: 1; }
+
+        /* 2d. Status badge pulse ring */
+        @keyframes pulseRing {
+            0%   { transform: scale(1);    opacity: .9; }
+            70%  { transform: scale(2.2);  opacity: 0; }
+            100% { transform: scale(1);    opacity: 0; }
+        }
+        .pulse-ring {
+            position: relative;
+            display: inline-block;
+        }
+        .pulse-ring::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: #10b981;
+            animation: pulseRing 2.4s ease-out infinite;
+        }
+
+        /* 2e. Number counter animation (applied via JS) */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-counter {
+            animation: countUp .6s cubic-bezier(.2,.75,.25,1) both;
+        }
+
+        /* 2f. Floating hero ambient particles */
+        @keyframes floatParticle {
+            0%, 100% { transform: translate(0, 0) scale(1);   opacity: .22; }
+            33%       { transform: translate(16px, -24px) scale(1.1); opacity: .38; }
+            66%       { transform: translate(-12px, 10px) scale(.9); opacity: .18; }
+        }
+        .hero-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #4F96F9 0%, transparent 70%);
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+        .hero-particle:nth-child(1) {
+            width: 220px; height: 220px;
+            top: 8%; left: 10%;
+            animation: floatParticle 12s ease-in-out infinite;
+        }
+        .hero-particle:nth-child(2) {
+            width: 160px; height: 160px;
+            top: 60%; right: 8%;
+            animation: floatParticle 15s ease-in-out infinite reverse;
+            animation-delay: -5s;
+        }
+        .hero-particle:nth-child(3) {
+            width: 100px; height: 100px;
+            bottom: 10%; left: 38%;
+            animation: floatParticle 10s ease-in-out infinite;
+            animation-delay: -8s;
+        }
+
+        /* 2g. Hero headline reveal (word by word slide-up) */
+        @keyframes heroWordIn {
+            from { opacity: 0; transform: translateY(32px) skewY(2deg); }
+            to   { opacity: 1; transform: translateY(0) skewY(0deg); }
+        }
+        .hero-word {
+            display: inline-block;
+            animation: heroWordIn .68s cubic-bezier(.2,.75,.25,1) both;
+        }
+        .hero-word:nth-child(1) { animation-delay: .08s; }
+        .hero-word:nth-child(2) { animation-delay: .16s; }
+        .hero-word:nth-child(3) { animation-delay: .24s; }
+        .hero-word:nth-child(4) { animation-delay: .32s; }
+        .hero-word:nth-child(5) { animation-delay: .40s; }
+
+        /* 2h. Card tilt 3D on hover (subtle perspective) */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform .4s cubic-bezier(.2,.75,.25,1), box-shadow .4s ease;
+        }
+        .tilt-card:hover {
+            transform: perspective(900px) rotateX(-3deg) rotateY(3deg) translateY(-5px);
+            box-shadow: 0 24px 56px -16px rgba(16,102,255,.28) !important;
+        }
+
+        /* 2i. Active nav link animated underline */
+        #nav-links a {
+            position: relative;
+        }
+        #nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 12px; right: 12px; bottom: 4px;
+            height: 2px;
+            border-radius: 9999px;
+            background: #1066FF;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s cubic-bezier(.2,.75,.25,1);
+        }
+        #nav-links a.is-active::after { transform: scaleX(1); }
+
+        /* 2j. Section separator line draw */
+        @keyframes lineDraw {
+            from { transform: scaleX(0); }
+            to   { transform: scaleX(1); }
+        }
+        .section-divider {
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #1066FF, #4F96F9, transparent);
+            transform-origin: left;
+            animation: lineDraw .9s cubic-bezier(.2,.75,.25,1) both;
+        }
+
+        /* 2k. Skill-bar shimmer sweep after fill */
+        @keyframes skillShimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .skill-bar {
+            transform-origin: 0 50%;
+            transition: transform 1.1s cubic-bezier(.2,.75,.25,1) .15s;
+            background-size: 200% auto !important;
+            animation: skillShimmer 3.5s linear infinite;
+        }
+        .motion-ready .reveal-on-scroll:not(.is-visible) .skill-bar {
+            transform: scaleX(0);
+        }
+
+        /* 2l. Contact form button ripple */
+        @keyframes ripple {
+            to { transform: scale(3.5); opacity: 0; }
+        }
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-ripple .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            background: rgba(255,255,255,.35);
+            animation: ripple .6s linear;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-particle,
+            .hero-word,
+            .pulse-ring::after,
+            .hero-counter,
+            .section-divider,
+            .skill-bar { animation: none !important; }
+            .glass-card::before { display: none !important; }
+            .tilt-card:hover { transform: translateY(-4px) !important; }
+            .project-banner-sheen::after { display: none !important; }
+            #nav-links a::after { transition: none !important; }
+            .motion-ready .reveal-on-scroll {
+                opacity: 0;
+                transform: translateY(22px);
+                filter: none;
+                transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
+            }
+            .motion-ready .reveal-on-scroll.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
     </style>
@@ -521,6 +736,11 @@
         <!-- Ambient Sky Glow Blobs -->
         <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#DBE8FC]/60 blur-3xl pointer-events-none"></div>
         <div class="absolute top-1/2 -right-32 w-96 h-96 rounded-full bg-[#E0EEFE]/60 blur-3xl pointer-events-none"></div>
+        <!-- Ambient Floating Particles -->
+        <div class="hero-particle" aria-hidden="true"></div>
+        <div class="hero-particle" aria-hidden="true"></div>
+        <div class="hero-particle" aria-hidden="true"></div>
+
         <div class="max-w-7xl mx-auto px-5 sm:px-8 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
@@ -528,7 +748,7 @@
                 <div class="lg:col-span-7 text-center lg:text-left">
                     <!-- Status Pill -->
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accentIndigo/10 border border-accentIndigo/30 text-xs font-medium text-[#1E3A8A] mb-6">
-                        <span class="w-2.5 h-2.5 rounded-full bg-accentEmerald animate-pulse"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-accentEmerald pulse-ring"></span>
                         Mahasiswa Sains Data UNESA &bull; Terbuka untuk Kolaborasi & Proyek
                     </div>
 
@@ -550,7 +770,7 @@
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-12">
-                        <a href="#projects" class="px-7 py-3.5 rounded-full font-bold text-sm bg-[#1066FF] hover:bg-[#0A5AF0] text-white shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+                        <a href="#projects" class="px-7 py-3.5 rounded-full font-bold text-sm bg-[#1066FF] hover:bg-[#0A5AF0] text-white shadow-md hover:shadow-lg transition-all flex items-center gap-2 btn-ripple">
                             <span>Eksplorasi Proyek</span>
                             <i class="fa-solid fa-arrow-right-long"></i>
                         </a>
@@ -567,7 +787,7 @@
                     <!-- Highlights Stat Badges -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl mx-auto lg:mx-0">
                         <div class="hero-stat bg-white p-4 text-center border-l-4 border-[#1066FF] rounded-2xl shadow-sm border border-[#E2E8F0]">
-                            <div class="text-2xl font-black text-[#0F172A] font-mono">3.84<span class="text-accentBlue text-sm font-sans">/4.0</span></div>
+                            <div class="text-2xl font-black text-[#0F172A] font-mono" data-counter="3.84" data-counter-decimals="2">3.84<span class="text-accentBlue text-sm font-sans">/4.0</span></div>
                             <div class="text-[11px] text-[#64748B] font-semibold uppercase tracking-wider mt-1">IPK Sains Data</div>
                         </div>
                         <div class="hero-stat bg-white p-4 text-center border-l-4 border-[#1E3A8A] rounded-2xl shadow-sm border border-[#E2E8F0]">
@@ -1567,7 +1787,7 @@
                 </div>
                 <!-- Stat 2 -->
                 <div class="bg-white border border-[#CBD5E1] rounded-2xl py-5 px-6 text-center hover:border-[#1066FF] hover:shadow-lg transition-all duration-300 shadow-sm">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-[#1066FF] font-mono tracking-tight">15+</div>
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[#1066FF] font-mono tracking-tight" data-counter="15" data-counter-suffix="+">15+</div>
                     <div class="text-xs text-[#64748B] font-medium mt-1">Apps Delivered</div>
                 </div>
                 <!-- Stat 3 -->
@@ -3029,7 +3249,7 @@
                                     <span class="text-accentCyan font-mono">Akurasi &gt;88%</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full skill-bar" style="width: 95%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1066FF] to-[#4F96F9] rounded-full skill-bar" style="width: 95%"></div>
                                 </div>
                             </div>
                             <div>
@@ -3038,7 +3258,7 @@
                                     <span class="text-accentBlue font-mono">16k Fitur &bull; LDA</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-bar" style="width: 90%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1066FF] to-[#4F96F9] rounded-full skill-bar" style="width: 90%"></div>
                                 </div>
                             </div>
                             <div>
@@ -3047,7 +3267,7 @@
                                     <span class="text-accentBlue font-mono">Klasifikasi</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-bar" style="width: 82%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1066FF] to-[#4F96F9] rounded-full skill-bar" style="width: 82%"></div>
                                 </div>
                             </div>
                         </div>
@@ -3085,7 +3305,7 @@
                                     <span class="text-accentPurple font-mono">R Spatial</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full skill-bar" style="width: 88%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1E3A8A] to-[#1066FF] rounded-full skill-bar" style="width: 88%"></div>
                                 </div>
                             </div>
                             <div>
@@ -3094,7 +3314,7 @@
                                     <span class="text-accentPurple font-mono">Audio FFT</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full skill-bar" style="width: 82%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1E3A8A] to-[#1066FF] rounded-full skill-bar" style="width: 82%"></div>
                                 </div>
                             </div>
                             <div>
@@ -3103,7 +3323,7 @@
                                     <span class="text-accentPurple font-mono">Automation</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full skill-bar" style="width: 90%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1E3A8A] to-[#1066FF] rounded-full skill-bar" style="width: 90%"></div>
                                 </div>
                             </div>
                         </div>
@@ -3146,7 +3366,7 @@
                                     <span class="text-[#1066FF] font-mono">Cloud &amp; Async</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-bar" style="width: 90%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#1066FF] to-[#4F96F9] rounded-full skill-bar" style="width: 90%"></div>
                                 </div>
                             </div>
                             <div>
@@ -3155,7 +3375,7 @@
                                     <span class="text-[#1066FF] font-mono">Cyber Grid</span>
                                 </div>
                                 <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full skill-bar" style="width: 86%"></div>
+                                    <div class="h-full bg-gradient-to-r from-[#4F96F9] to-[#1066FF] rounded-full skill-bar" style="width: 86%"></div>
                                 </div>
                             </div>
                         </div>
@@ -4025,6 +4245,77 @@
         if (icon) icon.className = 'fa-solid fa-sun text-sm text-amber-400';
     }
 
+
+    // ─── Enhanced Animation Scripts (Patch 7) ─────────────────────────────────
+
+    // Cursor-following glow on glass cards
+    function initCardGlow() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%';
+                const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%';
+                card.style.setProperty('--gx', x);
+                card.style.setProperty('--gy', y);
+            });
+        });
+    }
+
+    // Animated counters for hero stats
+    function initCounters() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const els = document.querySelectorAll('[data-counter]');
+        if (!els.length) return;
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                obs.unobserve(entry.target);
+                const el = entry.target;
+                const target = parseFloat(el.dataset.counter);
+                const decimals = el.dataset.counterDecimals ? parseInt(el.dataset.counterDecimals) : 0;
+                const suffix = el.dataset.counterSuffix || '';
+                const duration = 1200;
+                const start = performance.now();
+                function tick(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const ease = 1 - Math.pow(1 - p, 3);
+                    const val = (target * ease).toFixed(decimals);
+                    el.textContent = val + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+                el.classList.add('hero-counter');
+            });
+        }, { threshold: 0.5 });
+        els.forEach(el => obs.observe(el));
+    }
+
+    // Button ripple effect
+    function initRipple() {
+        document.querySelectorAll('.btn-ripple').forEach(btn => {
+            btn.addEventListener('click', e => {
+                const r = btn.getBoundingClientRect();
+                const size = Math.max(r.width, r.height);
+                const span = document.createElement('span');
+                span.className = 'ripple-effect';
+                span.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px`;
+                btn.appendChild(span);
+                span.addEventListener('animationend', () => span.remove());
+            });
+        });
+    }
+
+    // Staggered reveal delay per card index (overrides uniform delay)
+    function initStaggeredCards() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        document.querySelectorAll('.project-item, .glass-card').forEach((card, i) => {
+            if (!card.style.getPropertyValue('--reveal-delay')) {
+                card.style.setProperty('--reveal-delay', `${(i % 4) * 80}ms`);
+            }
+        });
+    }
+
     // Run animations on DOMContentLoaded
     window.addEventListener('DOMContentLoaded', () => {
         setTimeout(runCardDealingIntro, 260);
@@ -4033,6 +4324,10 @@
         initScrollReveals();
         initScrollProgress();
         initBackToTop();
+        initCardGlow();
+        initCounters();
+        initRipple();
+        initStaggeredCards();
     });
 
 </script>
