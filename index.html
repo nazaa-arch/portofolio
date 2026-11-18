@@ -121,14 +121,19 @@
 
         /* Shrinking Pill Nav on Scroll */
         #main-navbar {
-            transition: all 0.45s cubic-bezier(.2,.7,.2,1);
+            left: 50% !important;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 100%;
+            border: 1px solid transparent;
+            border-bottom-color: #E2E8F0;
+            transition: top .45s cubic-bezier(.22,1,.36,1), width .45s cubic-bezier(.22,1,.36,1), max-width .45s cubic-bezier(.22,1,.36,1),
+                        border-radius .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease, background-color .3s ease, border-color .3s ease;
         }
         #main-navbar.scrolled {
             top: 10px;
             max-width: 1240px;
             width: calc(100% - 32px);
-            left: 50%;
-            transform: translateX(-50%);
             border-radius: var(--r-full);
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px) saturate(150%);
@@ -671,13 +676,13 @@
             mix-blend-mode: soft-light;
         }
         .hero-stage.is-tilting .hero-glare { opacity: 1; }
-        .hero-float { transform: translate3d(var(--px, 0px), var(--py, 0px), 0); transition: transform .4s cubic-bezier(.22, 1, .36, 1); z-index: 6; }
+        .hero-float { transform: translate3d(var(--px, 0px), var(--py, 0px), 0); transition: transform .4s cubic-bezier(.22, 1, .36, 1); z-index: 8; }
 
-        .hero-orbit { position: absolute; left: 50%; top: 50%; width: 132%; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; z-index: 0; }
+        .hero-orbit { position: absolute; left: 50%; top: 50%; width: 150%; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; z-index: 7; }
         .hero-orbit-ring { position: absolute; inset: 0; border-radius: 50%; border: 1.5px dashed rgba(16, 102, 255, .25); }
         .hero-orbit-spin { position: absolute; inset: 0; animation: heroSpin 36s linear infinite; }
         .hero-orb {
-            position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 12px;
+            position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; border: 3px solid #fff;
             display: grid; place-items: center; color: #fff; font-size: 17px; background: var(--c);
             box-shadow: 0 8px 22px color-mix(in srgb, var(--c) 45%, transparent);
             transform: rotate(var(--a)) translate(0, calc(var(--orbit-r, 200px) * -1)) rotate(calc(var(--a) * -1));
@@ -690,7 +695,7 @@
 
         @media (max-width: 640px) {
             .hero-role { font-size: 13px; padding: 7px 12px; }
-            .hero-orb { width: 32px; height: 32px; margin: -16px 0 0 -16px; font-size: 14px; border-radius: 10px; }
+            .hero-orbit { display: none; }
         }
         @media (prefers-reduced-motion: reduce) {
             .hero-orbit-spin, .hero-orb i, .hero-caret { animation: none !important; }
@@ -712,7 +717,7 @@
     </div>
 
     <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300" id="main-navbar">
+    <nav class="fixed top-0 z-40 glass-nav" id="main-navbar">
         <div id="scroll-progress-bar" aria-hidden="true"></div>
         <div class="max-w-7xl mx-auto px-5 sm:px-8">
             <div class="flex items-center justify-between h-20">
@@ -3714,13 +3719,7 @@
 
         // Sticky Navbar styling on scroll
         const navbar = document.getElementById('main-navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                navbar.classList.add('shadow-xl', 'bg-darkBg/90');
-            } else {
-                navbar.classList.remove('shadow-xl', 'bg-darkBg/90');
-            }
-        });
+        // (scrolled styling handled by initPillNav)
 
         // --- AI Project Consultant Engine ---
         function setPrompt(text) {
@@ -4072,7 +4071,9 @@
         const nav = document.getElementById('main-navbar');
         if (!nav) return;
         function onScroll() {
-            nav.classList.toggle('scrolled', window.scrollY > 30);
+            const y = window.scrollY;
+            if (y > 48) nav.classList.add('scrolled');
+            else if (y < 12) nav.classList.remove('scrolled');
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
