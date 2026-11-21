@@ -2032,14 +2032,14 @@
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mt-3">What I've Built</h2>
                     <div class="w-12 h-1 bg-[#1066FF] rounded-full my-3"></div>
                     <p class="text-[#64748B] text-sm max-w-xl leading-relaxed">
-                        A curated showcase of 14 flagship systems &amp; applied research platforms across Cloud AI, Simulation Studios, and Spatial Data Science.
+                        A curated showcase of 15 flagship systems &amp; applied research platforms across Cloud AI, Cyber Defense, Simulation Studios, and Spatial Data Science.
                     </p>
                 </div>
 
                 <!-- Filter Buttons -->
                 <div class="flex flex-wrap items-center gap-2 bg-[#F5F8FE] p-1.5 rounded-2xl border border-[#CBD5E1] shadow-sm">
                     <button class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold text-[#475569] hover:text-[#1066FF] transition-all font-semibold" data-filter="all">
-                        Semua (14)
+                        Semua (15)
                     </button>
                     <button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-[#475569] hover:text-[#1066FF] transition-all font-semibold" data-filter="ml-ai">
                         Machine Learning & AI
@@ -2059,6 +2059,97 @@
             <!-- Projects Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
 
+
+<!-- Flagship Project: WAYANG (Kartika Cyber Hackathon 2026) -->
+                <div class="project-item bg-white rounded-3xl border border-[#CBD5E1] shadow-sm hover:shadow-xl hover:border-[#1066FF] overflow-hidden flex flex-col justify-between group transition-all duration-300" data-category="web-systems database-software">
+                    <div>
+                        <!-- Header banner graphic -->
+                        <div class="h-44 relative bg-gradient-to-br from-[#12306B] via-[#0B1F44] to-[#081632] p-5 flex flex-col justify-between border-b border-[#D4AF37]/40 overflow-hidden">
+                            <img src="assets/wayang/emblem.png" alt="" aria-hidden="true" class="absolute -right-6 -bottom-8 w-40 opacity-15 pointer-events-none select-none" loading="lazy">
+                            <div class="flex items-center justify-between relative z-10">
+                                <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-white/10 text-[#ECCC6E] border border-[#D4AF37]/40 backdrop-blur-sm">
+                                    2026 &bull; CYBER DEFENSE &amp; ICS/OT
+                                </span>
+                                <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-white/15 text-white border border-white/25 flex items-center gap-1.5 shadow-sm">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    PROTOTYPE
+                                </span>
+                            </div>
+                            <div class="relative z-10 flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-white border border-[#D4AF37]/60 flex items-center justify-center shadow-inner flex-shrink-0 p-1.5">
+                                    <img src="assets/wayang/emblem.png" alt="Logo WAYANG" class="w-full h-full object-contain" loading="lazy">
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold text-lg leading-tight flex items-center gap-1.5 tracking-wide">
+                                        WAYANG
+                                    </div>
+                                    <div class="text-xs text-[#ECCC6E]/90">Adaptive Deception Grid untuk Pertahanan IT/OT</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-800 border border-amber-200 font-semibold">
+                                    Kartika Cyber Hackathon 2026
+                                </span>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#0F172A] mb-2 group-hover:text-[#1066FF] transition-colors">
+                                WAYANG: Sistem Pengecoh Siber untuk Aset Industri (ICS/SCADA)
+                            </h3>
+                            <p class="text-sm text-[#334155] leading-relaxed mb-4">
+                                Proxy Modbus transparan yang <strong>mengalihkan penyerang diam-diam ke "bayangan"</strong> peniru peralatan nyata (depo BBM, genset, gerbang), sementara aset asli tetap aman. Dilengkapi konsol C4ISR real-time, bot Telegram, dan rantai bukti SHA-256 + Merkle.
+                            </p>
+
+                            <div class="space-y-1.5 text-xs text-[#64748B] mb-5">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-shield-halved text-[#B8860B]"></i>
+                                    <span>0 dari 105 perintah tulis penyerang sampai ke aset (simulator internal)</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-diagram-project text-accentBlue"></i>
+                                    <span>Integrasi SOC: Suricata &rarr; WAYANG &rarr; Wazuh, MITRE ATT&amp;CK for ICS</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-palette text-accentPurple"></i>
+                                    <span>Identitas visual navy-emas &amp; konsol komando dirancang sendiri</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0">
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Python</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">FastAPI</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Modbus/TCP</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">WebSocket</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Docker</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Suricata</span>
+                            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-[#F5F8FE] text-[#334155] border border-[#E2E8F0]">Wazuh</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mb-2">
+                            <a href="https://cyber.steamcraft.online" target="_blank" rel="noopener" class="py-2 px-3 rounded-xl bg-[#0B1F44] hover:bg-[#12306B] border border-[#D4AF37]/60 text-[#ECCC6E] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-satellite-dish text-[11px]"></i>
+                                <span>Buka Konsol</span>
+                            </a>
+                            <a href="https://youtu.be/oBNlbNTC-hU" target="_blank" rel="noopener" class="py-2 px-3 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#CBD5E1] text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-youtube text-[11px]"></i>
+                                <span>Video Demo</span>
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="https://github.com/nazaa-arch/cyber" target="_blank" rel="noopener" class="py-2 px-3 rounded-xl bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#CBD5E1] text-[#334155] hover:text-[#1066FF] text-xs font-semibold transition-all flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-github text-[11px]"></i>
+                                <span>GitHub Repo</span>
+                            </a>
+                            <button onclick="openProjectModal('wayang')" class="py-2.5 px-4 rounded-xl bg-[#1066FF] hover:bg-[#0A5AF0] text-white font-bold text-xs shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-1.5 flex-1">
+                                <span>Detail Sistem</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
 <!-- Flagship Project 1: SteamCraft Online -->
                 <div class="project-item bg-white rounded-3xl border border-[#CBD5E1] shadow-sm hover:shadow-xl hover:border-[#1066FF] overflow-hidden flex flex-col justify-between group transition-all duration-300" data-category="database-software ml-ai">
@@ -3474,6 +3565,26 @@
                     { text: 'VeriLab Engine', url: 'https://verilab.steamcraft.online', icon: 'fa-solid fa-microscope' }
                 ]
             },
+            wayang: {
+                title: 'WAYANG: Adaptive Deception Grid untuk Pertahanan IT/OT (Prototype)',
+                category: 'Cyber Defense, ICS/OT Security & Deception Engineering',
+                year: '2026',
+                metrics: '0/105 perintah tulis penyerang sampai ke aset, deteksi median 4,42 ms, dwell time penyerang 2,2× vs honeypot statis (simulator internal)',
+                tools: ['Python', 'FastAPI', 'asyncio', 'Modbus/TCP', 'WebSocket', 'Leaflet', 'ECharts', 'Docker', 'Render', 'Telegram Bot API', 'Suricata', 'Wazuh', 'STIX 2.1', 'MITRE ATT&CK for ICS', 'SHA-256 Merkle Tree'],
+                problem: 'Banyak sistem kendali industri (PLC/SCADA) masih memakai Modbus/TCP, protokol tanpa autentikasi: begitu penyerang masuk jaringan, ia bisa langsung menulis ke register pompa atau katup. Honeypot statis juga mudah dikenali karena responsnya terlalu rapi dan tidak berperilaku seperti mesin sungguhan.',
+                solution: 'Terinspirasi pertunjukan wayang, di mana penonton hanya melihat bayangan di kelir:<br><br>1. <strong>Kelir</strong>, proxy Modbus transparan yang menilai setiap sesi. Operator sah diteruskan ke aset asli, sesi mencurigakan atau operator yang menulis di luar izinnya dibelokkan diam-diam.<br><br>2. <strong>Bayangan</strong>, umpan yang meniru fisika peralatan nyata (aliran pipa BBM, genset 50 Hz, gerbang & CCTV) lengkap dengan jeda siklus PLC, sehingga sulit dibedakan dari mesin asli.<br><br>3. <strong>Dalang Console</strong>, konsol C4ISR real-time (peta serangan, tampilan kembar aset asli vs bayangan, Uji Taktis) dan bot Telegram untuk perwira jaga. Setiap langkah penyerang dipetakan ke MITRE ATT&CK for ICS, disimpan dalam rantai bukti SHA-256 + pohon Merkle, dan diteruskan ke SOC (Suricata &rarr; WAYANG &rarr; Wazuh). Prinsipnya 100% defensif: manusia yang memutuskan blokir, tanpa hack-back.<br><br>Identitas visual navy-emas dan konsol komandonya juga dirancang dalam proyek ini.',
+                impact: 'Purwarupa untuk Kartika Cyber Hackathon 2026 (UNESADA Cyber v4.0), berjalan 24/7 di cloud dengan 76 tes otomatis di CI. Pada simulator internal: 0 dari 105 perintah tulis penyerang sampai ke aset, keputusan deteksi median 4,42 ms, dan penyerang simulasi bertahan 2,2× lebih lama dibanding honeypot statis.<br><br>Batasan ditulis terbuka: semua angka berasal dari simulator dan penyerang berskrip buatan sendiri, belum diuji pada PLC fisik, dan baru mendukung Modbus/TCP.',
+                gallery: [
+                    { src: 'assets/wayang/console.jpg', caption: 'Dalang Console: peta serangan, tampilan kembar aset asli vs bayangan, dan Uji Taktis.' },
+                    { src: 'assets/wayang/konsep.jpg', caption: 'Konsep Kelir, Bayangan, dan Dalang.' },
+                    { src: 'assets/wayang/identitas.jpg', caption: 'Panduan identitas visual WAYANG.' }
+                ],
+                links: [
+                    { text: 'Buka Dalang Console', url: 'https://cyber.steamcraft.online', icon: 'fa-solid fa-satellite-dish' },
+                    { text: 'Video Demo', url: 'https://youtu.be/oBNlbNTC-hU', icon: 'fa-brands fa-youtube' },
+                    { text: 'GitHub Repository', url: 'https://github.com/nazaa-arch/cyber', icon: 'fa-brands fa-github' }
+                ]
+            },
             steamcraft: {
                 title: 'STEAM-Craft: Platform Kolaborasi & Edukasi Sains Multidisiplin Berbasis AI',
                 category: 'Full-Stack Web Development, Cloud & AI Integration',
@@ -3620,11 +3731,20 @@
                     </div>
                 </div>
 
+                ${data.gallery && data.gallery.length ? `
+                <div class="mt-6 pt-5 border-t border-[#E2E8F0]">
+                    <div class="text-xs font-mono text-[#64748B] mb-3">Galeri Proyek:</div>
+                    <div class="space-y-4">
+                        ${data.gallery.map(g => `<figure><img src="${g.src}" alt="${g.caption}" loading="lazy" class="w-full rounded-xl border border-[#E2E8F0] shadow-sm"><figcaption class="text-[11px] text-[#64748B] mt-1.5">${g.caption}</figcaption></figure>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
                 ${data.links && data.links.length ? `
                 <div class="mt-6 pt-5 border-t border-[#E2E8F0]">
                     <div class="text-xs font-mono text-[#64748B] mb-2">Akses & Tautan Langsung:</div>
                     <div class="flex flex-wrap gap-2">
-                        ${data.links.map(l => `<a href="${l.url}" target="_blank" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center gap-1.5"><i class="${l.icon}"></i> ${l.text} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-70"></i></a>`).join('')}
+                        ${data.links.map(l => `<a href="${l.url}" target="_blank" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F5F8FE] hover:bg-[#E0EEFE] border border-[#CBD5E1] text-[#1066FF] transition-all flex items-center gap-1.5"><i class="${l.icon}"></i> ${l.text} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1 opacity-70"></i></a>`).join('')}
                     </div>
                 </div>
                 ` : ''}
