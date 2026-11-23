@@ -15,7 +15,7 @@ Platform portofolio ini kini mengadopsi estetika **Electric Cobalt & Studio Sky 
 
 ### Karya Unggulan Desain UI/UX:
 1. **"This Me" — Aplikasi Mobile Pembelajaran BISINDO**
-   - 🥈 **Medali Perak (Juara 2) DIMAS TI Nasional & Finalis GEMASTIK XVIII** (Puspresnas).
+   - 🥈 **Medali Perak (Juara 2) DIMAS TI Nasional** (Puspresnas).
    - 📊 Evaluasi Usability: Skor **SUS 82.3 (Grade A / Excellent)**.
    - ♿ Standar Aksesibilitas: **WCAG 2.1 AAA** untuk komunitas Teman Tuli & Dengar.
 2. **STEAM-Craft Design System & Multi-Platform Web Studio**
@@ -87,7 +87,7 @@ Platform portofolio ini kini mengadopsi estetika **Electric Cobalt & Studio Sky 
 | 6 | **MakerCraft 3D** | 2026 | WebGL & 3D CAD | Studio pemodelan 3D parametrik in-browser, visualisasi Three.js, ekspor STL/OBJ untuk prototyping. |
 | 7 | **SteamGeo Intelligence** | 2026 | Geospatial AI & Remote Sensing | Analisis citra satelit interaktif, indeks spektral NDVI/NDWI, thermal heat island mapping Jawa Timur. |
 | 8 | **SteamArena** | 2026 | EdTech & Gamification | Arena tantangan logika komputasional & coding interaktif, dynamic sandbox, live competitive leaderboard. |
-| 9 | **"This Me" Aplikasi BISINDO** | 2025 | Accessibility & UI/UX | **Medali Perak (Juara 2) DIMAS TI Nasional & Finalis GEMASTIK XVIII**. Evaluasi SUS skor 82,3 (Grade A). |
+| 9 | **"This Me" Aplikasi BISINDO** | 2025 | Accessibility & UI/UX | **Medali Perak (Juara 2) DIMAS TI Nasional**. Evaluasi SUS skor 82,3 (Grade A). |
 | 10 | **Klasifikasi Fine-Grained Cyberbullying** | 2025–2026 | NLP & Hybrid Machine Learning | Akurasi >88% (7 Kelas), 1.100+ data multi-platform, 16.000+ dimensi fitur. *Manuscript in Preparation (SINTA 1 & Scopus Q2 Target)*. |
 | 11 | **CuacaKita** | 2025 | Predictive Modeling | Prediksi cuaca interaktif machine learning, akurasi 80% dari 1.000+ observasi sensor cuaca. |
 | 12 | **Analisis Spasial DBD Jawa Timur** | 2025 | Spatial Statistics (GWR) | Geographically Weighted Regression 38 kabupaten/kota Jawa Timur, pemodelan heterogenitas spasial. |
